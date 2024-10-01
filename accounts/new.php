@@ -6,7 +6,7 @@ include_once 'partials/account-header.php';
         <div class="wrapper fadeInDown">
           <div id="formContent">
             <!-- Tabs Titles -->
-            <h4>We are <span>Kizusi Rental</span></h4>
+            <h4>We are <span>Rarity Cars</span></h4>
             <p>Create New Account</p>
 
             <!-- Icon -->

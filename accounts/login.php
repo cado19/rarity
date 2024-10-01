@@ -12,7 +12,7 @@ if (isset($_SESSION['account'])) {
           <div id="formContent">
             <!-- Tabs Titles -->
             <div class="titles mt-3">
-              <h4>We are <span>Kizusi Smartex</span></h4>
+              <h4>We are <span>Rarity Cars</span></h4>
               <p>Welcome back! Log in and resume.</p>
             </div>
 
