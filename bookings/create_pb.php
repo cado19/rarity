@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	// 	header("Location: index.php?page=bookings/new&end_time_err=$end_time_err");
 	// 	exit;
 	// }
-
+	$a_id = $_POST['account_id'];
 	$v_id = $_POST['vehicle_id'];
 	$c_id = $_POST['customer_id'];
 	$d_id = $_POST['driver_id'];

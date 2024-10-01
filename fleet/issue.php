@@ -43,9 +43,9 @@ if (isset($_GET['id'])) {
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title"><b><?php show_value($vehicle, 'model');?> <?php show_value($vehicle, 'make');?> <?php show_value($vehicle, 'number_plate');?></b></h5> <br>
-						<p>Issue: <?php show_value($issue, 'title');?></p>
-						<p>Description: <?php show_value($issue, 'description');?> </p>
-						<p>Status: <?php show_value($issue, 'status');?> </p>
+						<p><b>Issue: </b><?php show_value($issue, 'title');?></p>
+						<p><b>Description: </b> <?php show_value($issue, 'description');?> </p>
+						<p><b>Status: </b> <?php show_value($issue, 'status');?> </p>
 						<?php if ($issue['status'] == 'unresolved'): ?>
 							<form action="index.php?page=fleet/resolve_issue" method="POST" class="form-inline">
 								<input type="hidden" name="issue_id" value="<?php echo $id; ?>">
@@ -55,8 +55,10 @@ if (isset($_GET['id'])) {
 								</div>
 								<button class="btn btn-outline-dark mb-2">Resolve</button>
 							</form>
+						<?php else: ?>
+							<p><b>Cost to resolve: </b> <?php show_numeric_value($issue, 'resolution_cost');?> </p>
+							<p><b>Date resolved: </b> <?php show_date_value($issue, 'resolution_date');?> </p>
 						<?php endif;?>
-						<?php ?>
 					</div>
 				</div>
 			</div>

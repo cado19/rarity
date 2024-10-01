@@ -12,6 +12,7 @@ function show_value($object, $value) {
 	}
 }
 
+// function that will show numeric record value or NA if absent
 function show_numeric_value($object, $value) {
 	global $res;
 	if (array_key_exists($value, $object)) {
@@ -25,6 +26,20 @@ function show_numeric_value($object, $value) {
 		echo 0;
 	}
 
+}
+
+// function that will show date record value or NA if absent
+function show_date_value($object, $value) {
+	if (array_key_exists($value, $object)) {
+		if (isset($object[$value])) {
+			$date_display = strtotime($object[$value]);
+			echo date("l jS \of F Y", $date_display);
+		} else {
+			echo "N/A";
+		}
+	} else {
+		echo "N/A";
+	}
 }
 
 // function that will show record value or empty string in field in edit form

@@ -378,4 +378,26 @@ function vehicle_from_issues($issue_id) {
 	return $res;
 }
 
+function resolve_issue($issue_id, $cost, $date){
+	global $con;
+	global $res;
+	$status = "resolved";
+
+	try {
+		$con->beginTransaction();
+		$sql = "UPDATE vehicle_issues SET resolution_cost = ?, resolution_date = ?, status = ? WHERE id = ?";
+		$stmt = $con->prepare($sql);
+		if($stmt->execute([$cost, $date, $status, $issue_id])){
+			$res = "Success";
+		}else{
+			$res = "Failed";
+		}
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+	
+	return $res;
+}
+
 ?>

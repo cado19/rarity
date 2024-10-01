@@ -195,7 +195,7 @@ $current_date = date('Y-m-d');
                           <br>
                           <div class="text-muted">
                             <p class="text-sm">Company Name
-                              <b class="d-block">Kizusi Rentals</b>
+                              <b class="d-block">Rarity Cars</b>
                             </p>
                             <p class="text-sm">Client
                               <b class="d-block"><?php echo $booking['first_name']; ?> <?php echo $booking['last_name']; ?></b>
