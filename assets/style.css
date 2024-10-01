@@ -1,0 +1,58 @@
+.content {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.display-img{
+    width: 450px;
+    height: 400px;
+    object-fit: cover;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.logo-img{
+    height: 100px;
+    width: 250px;
+    margin-top: 5px;
+}
+.v-image{
+    width: 400px;
+    height: 400px;
+}
+.v-card {
+    margin-bottom: 30px;
+}
+.v-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.v-card .card-subtitle {
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #8898aa;
+}
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f3f8fa!important
+}
+.table-product td{
+    border-top: 0px solid #dee2e6 !important;
+    color: #728299!important;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

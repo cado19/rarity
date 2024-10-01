@@ -1,0 +1,342 @@
+	CUSTOMERS
+customer_details
+	id
+	customer_first_name
+	customer_last_name
+	contact_phone_number
+	contact_email
+	contact_date_of_birth
+	contact_drivers_license_no
+	contact_drivers_license_expiration
+	contact_id_type
+	contact_id_no 
+	contact_residential_address
+	contact_work_address
+	contact_blacklisted (options: yes, no)
+	
+organisation_details
+	id 
+	organisation_name
+	contact_name
+	email
+	contact_no 
+	contact_name 
+	contact_id
+	kra_pin
+	certificate_of_incorporation
+	organisation_logo
+	
+drivers (for the business)
+	id
+	first_name
+	last_name
+	Id_no
+	DL_no
+	DL_expiration_date
+	date_of_birth
+	phone_number
+	email
+	
+	HOST
+	
+	
+	
+	FLEET
+	
+Vehicle Basics
+	id
+	model
+	make
+	number plate
+	seats
+	category (options: small car, medium car, suv, pickup, safari, van/bus, luxury, minivan. mid-size suv )
+	drive train (options: 2WD, 4WD)
+	transmission (options: automatic, manual)
+	fuel  (options: petrol, diesel)
+	
+Vehicle Extras
+	vehicle_id
+	bluetooth
+	keyless_entry
+	reverse_cam
+	audio_input
+	gps
+	android_auto
+	apple_carplay
+	
+Vehicle Pricing and Fees
+	self-drive (options: Yes, No, with driver_only)
+	daily_rate
+	broker_rate
+	vehicle_excess
+	refundable_security_deposit
+	
+Vehicle Insurance
+	vehicle_id
+	insurance_start
+	insurance_expiry
+	insurance_type
+	
+	
+	
+				BOOKING
+booking
+	id 
+	customer_id
+	vehicle_id
+  driver_id
+	status (options: pending/unsigned-contract, active/signed-contract, completed/vehicle-returned)
+	start_date
+	end_date
+  created_at
+
+booking_request
+  id
+  vehicle_id
+  customer_id
+  start_date
+  end_date
+  seen
+  created_at
+
+contract
+  id
+  booking_id
+  price_per_day
+  excess
+  car_model
+  car_make
+  car_reg
+  hirer_address
+  hirer_name
+  driver_name
+  driver_dl
+  driver_id
+  signature
+  created_at
+  
+  account
+  id
+  name 
+  email 
+  password
+  phone_no
+  logo
+  signature
+  created_at
+  website
+  representative
+  deleted
+  
+  Save the booking
+  Get the start_date, end_date, vehicle_daily_rate, vehicle_excess from booking and vehicle pricing table using last insert id of booking.
+  Get difference in days.
+  Multiply the days with daily rate.
+  update sql to insert the total cost of booking into the booking table
+
+  In contract details we'll be making the calculations
+	
+	
+	
+*************** SQL ***************
+
+CREATE TABLE `kisuzi-rental`.`customer_details` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(60) NULL,
+  `phone_no` VARCHAR(11) NULL,
+  `email` VARCHAR(100) NULL,
+  `date_of_birth` DATETIME NULL,
+  `dl_no` VARCHAR(11) NULL,
+  `dl_expiration` DATETIME NULL,
+  `id_type` VARCHAR(45) NULL,
+  `id_no` VARCHAR(11) NULL,
+  `residential_address` VARCHAR(45) NULL,
+  `work_address` VARCHAR(45) NULL,
+  `blacklisted` VARCHAR(11) NULL,
+  `deleted` VARCHAR(45) NULL DEFAULT 'false',
+  `account_id` INT NULL,
+  PRIMARY KEY (`id`));
+  
+CREATE TABLE `kisuzi-rental`.`organisation_details` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `contact_name` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `contact_no` VARCHAR(11) NULL,
+  `contact_id_type` VARCHAR(45) NULL,
+  `contact_id_no` VARCHAR(11) NULL,
+  `kra_pin` VARCHAR(13) NULL,
+  `certificate_of_inc` VARCHAR(255) NULL,
+  `compsny_logo` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
+  
+CREATE TABLE `kisuzi-rental`.`drivers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(50) NULL,
+  `last_name` VARCHAR(50) NULL,
+  `id_no` VARCHAR(11) NULL,
+  `dl_no` VARCHAR(11) NULL,
+  `dl_expiration_date` DATETIME NULL,
+  `date_of_birth` DATETIME NULL,
+  `phone_no` VARCHAR(11) NULL,
+  `profile` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
+  
+CREATE TABLE `kisuzi-rental`.`drivers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `id_no` VARCHAR(11) NULL,
+  `dl_no` VARCHAR(11) NULL,
+  `dl_expiration_date` DATETIME NULL,
+  `date_of_birth` DATETIME NULL,
+  `phone_no` VARCHAR(11) NULL,
+  `email` VARCHAR(100) NULL,
+  `profile` VARCHAR(255) NULL,
+  `deleted` VARCHAR(45) NULL DEFAULT 'false',
+  `account_id` INT NULL, 
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+  
+CREATE TABLE `kisuzi-rental`.`vehicle_basics` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `model` VARCHAR(45) NOT NULL,
+  `make` VARCHAR(45) NOT NULL,
+  `number_plate` VARCHAR(45) NULL,
+  `seats` VARCHAR(11) NULL,
+  `category` VARCHAR(11) NULL,
+  `drive_train` VARCHAR(11) NULL,
+  `transmission` VARCHAR(11) NULL,
+  `fuel` VARCHAR(11) NULL,
+  `deleted` VARCHAR(45) NULL DEFAULT 'false',
+  `account_id` INT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`vehicle_extras` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `vehicle_id` VARCHAR(45) NOT NULL,
+  `bluetooth` VARCHAR(11) NULL,
+  `keyless_entry` VARCHAR(11) NULL,
+  `reverse_cam` VARCHAR(11) NULL,
+  `audio_input` VARCHAR(11) NULL,
+  `gps` VARCHAR(11) NULL,
+  `andoid_auto` VARCHAR(11) NULL,
+  `apple_carplay` VARCHAR(11) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`vehicle_pricing` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `vehicle_id` INT NOT NULL,
+  `self_drive` VARCHAR(11) NULL,
+  `daily_rate` VARCHAR(11) NULL,
+  `broker_rate` VARCHAR(11) NULL,
+  `vehicle_excess` VARCHAR(11) NULL,
+  `refundable_security_deposit` VARCHAR(11) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `kisuzi-rental`.`booking` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `vehicle_id` INT NOT NULL,
+  `customer_id` INT NULL,
+  `driver_id` INT NULL,
+  `start_date` DATE NULL,
+  `end_date` DATE NULL,
+  `total` VARCHAR(45) NULL,
+  `deleted` VARCHAR(45) NULL DEFAULT 'false',
+  `account_id` INT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`accounts` (
+`id` INT NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(100) NOT NULL,
+`email` VARCHAR(255) NULL,
+`password` VARCHAR(255) NULL,
+`phone_no` VARCHAR(11) NULL,
+`logo` VARCHAR(255) NULL,
+`signature` VARCHAR(255) NULL,
+`representative` VARCHAR(100) NULL,
+`verified` VARCHAR(100) NULL DEFAULT 'false',
+`deleted` VARCHAR(45) NULL DEFAULT 'false',
+`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`contracts`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `booking_id` INT NULL,
+  `signature` VARCHAR(255) NULL,
+  `account_id` INT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`client_requests` (
+  `id` INT NOT NULL,
+  `customer_id` VARCHAR(11) NULL,
+  `vehicle_id` VARCHAR(11) NULL,
+  `start_date` DATE NULL,
+  `end_date` DATE NULL,
+  `seen` VARCHAR(11) NULL DEFAULT 'No',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`blacklist` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` INT NULL,
+  `reason` LONGTEXT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`partners` (
+`id` INT NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(150) NULL,
+`email` VARCHAR(100) NULL,
+`phone_no` VARCHAR(15) NULL,
+`deleted` VARCHAR(15) NULL DEFAULT 'No',
+`created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`vehicle_issues` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `vehicle_id` INT NULL,
+  `title` VARCHAR(45) NULL,
+  `description` LONGTEXT NULL,
+  `status` VARCHAR(45) NULL DEFAULT 'pending',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`));
+
+CREATE TABLE `kisuzi-rental`.`roles` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+
+
+ALTER TABLE `kisuzi-rental`.`bookings` 
+ADD COLUMN `total` VARCHAR(45) NULL AFTER `end_date`,
+ADD COLUMN `deleted` VARCHAR(45) NULL DEFAULT 'false' AFTER `total`;
+
+ALTER TABLE `kisuzi-rental`.`accounts` 
+ADD COLUMN `verified` VARCHAR(10) NULL DEFAULT 'false' AFTER `deleted`;
+
+ALTER TABLE `partners` 
+ADD COLUMN `phone_no` VARCHAR(15) NULL AFTER `email`;
+
+
+
+INSERT INTO `kisuzi-rental`.`customer_details` (`first_name`, `last_name`, `phone_no`, `email`, `date_of_birth`, `dl_no`, `dl_expiration`, `id_type`, `id_no`, `residential_address`, `work_address`, `blacklisted`) VALUES ('Michael', 'Ochieng', '7586276644', 'michael.williams@x.dummyjson.com', '1989-8-10', '52QT67WE', '2027-9-30', 'National Id', '29875643', 'Kisumu, Kisumu', 'Kakamega, Kakamega', 'No');
+
+INSERT INTO `kisuzi-rental`.`vehicle_basics` (`model`, `make`, `number_plate`, `seats`, `category`, `drive_train`, `transmission`, `fuel`) VALUES ('Montero', 'Mitsubishi', 'KDM 344J', '7', 'SUV', '4WD', 'Automatic', 'Petrol');
+
+select vb.model AS Model, vb.make AS Make, vb.category AS Category, vp.daily_rate AS Rate FROM `kisuzi-rental`.`vehicle_basics` vb INNER JOIN `kisuzi-rental`.`vehicle_pricing` vp ON vb.id = vp.vehicle_id;   
+
+DataTable Options
+{
+          "responsive": true, "lengthChange": false, "autoWidth": false,
+          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }
+
+http://localhost:3000/index.php?page=contracts/edit&id=10
