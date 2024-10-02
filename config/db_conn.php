@@ -16,7 +16,7 @@
     $DBPASS = $DBPASSWORD; 
 
     // DATABASE NAME
-    $DBNAME = "kisuzi-rental"; 
+    $DBNAME = "rarity-rental"; 
 
 
     try {

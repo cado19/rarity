@@ -75,7 +75,14 @@ if (isset($_GET['id'])) {
 
                     <div class="row">
                         <div class="col-lg-5 col-md-4 col-sm-5">
-                            <div class="white-box text-center"><img src="fleet/images/<?php echo show_value($vehicle, 'image'); ?>" class="img-responsive v-image"></div>
+                            <div class="white-box text-center">
+                                <!-- Vehicle Image  -->
+                                <?php if (isset($vehicle['image'])): ?>
+                                    <img src="fleet/images/<?php echo $vehicle['image']; ?>" class="img-responsive v-image">
+                                <?php else: ?>
+                                    <img src="fleet/images/car-avatar.jpg" class="img-responsive v-image">
+                                <?php endif;?>
+                            </div>
                             <a href="index.php?page=fleet/image_form&id=<?php echo $id; ?>" class="btn btn-outline-priamary btn-rounded">Upload image</a>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
