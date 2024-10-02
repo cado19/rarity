@@ -142,7 +142,7 @@ $account_id = $_SESSION['account']['id'];
 
                             <div class="form-group">
                                 <label for="seats">Colour</label>
-                                <input type="text" name="colour" class="form-control form-control-border" required>
+                                <input type="text" name="colour" class="form-control form-control-border">
                                 <?php if (isset($_GET['colour_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['colour_err']; ?></p>
                                 <?php endif;?>
@@ -178,7 +178,7 @@ $account_id = $_SESSION['account']['id'];
 
                             <div class="form-group">
                                 <label for="deposit">Refundable Security Deposit</label>
-                                <input type="text" name="deposit" class="form-control form-control-border" required>
+                                <input type="text" name="deposit" class="form-control form-control-border">
                                 <?php if (isset($_GET['deposit_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['deposit_err']; ?></p>
                                 <?php endif;?>

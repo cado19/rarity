@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$num_plate_1_err = "Required";
 		header("Location: index.php?page=fleet/new&$num_plate_1_err=$num_plate_1_err");
 		exit;
-	} elseif ($_POST['num_plate_1'] != 3) {
+	} elseif (strlen($_POST['num_plate_1']) != 3) {
 		$num_plate_1_err = "Atleast 3 letters required";
 		header("Location: index.php?page=fleet/new&$num_plate_1_err=$num_plate_1_err");
 		exit;
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$num_plate_2_err = "Required";
 		header("Location: index.php?page=fleet/new&$num_plate_2_err=$num_plate_2_err");
 		exit;
-	} elseif ($_POST['num_plate_2'] != 4) {
+	} elseif (strlen($_POST['num_plate_2']) != 4) {
 		$num_plate_2_err = "Atleast 4 characters required";
 		header("Location: index.php?page=fleet/new&$num_plate_2_err=$num_plate_2_err");
 		exit;
