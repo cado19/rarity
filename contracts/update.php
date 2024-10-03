@@ -15,7 +15,7 @@ $DBUSER = $DBUSERNAME;
 $DBPASS = $DBPASSWORD;
 
 // DATABASE NAME
-$DBNAME = "kisuzi-rental";
+$DBNAME = "rarity-rental";
 
 try {
 	$con = new PDO("$DBDRIVER:host=$DBHOST;dbname=$DBNAME", $DBUSER, $DBPASS);
