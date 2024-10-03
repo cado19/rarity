@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		exit;
 	} elseif (strlen($_POST['num_plate_1']) != 3) {
 		$num_plate_1_err = "Atleast 3 letters required";
-		header("Location: index.php?page=fleet/new&$num_plate_1_err=$num_plate_1_err");
+		header("Location: index.php?page=fleet/new&num_plate_1_err=$num_plate_1_err");
 		exit;
 	}
 	if (empty($_POST['num_plate_2'])) {
@@ -94,9 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// }
 
 	// format the number plate
-	$num_plate_1 = ucwords($_POST['num_plate_1']);
-	$num_plate_1 = ucwords(substr($_POST['num_plate_2'], -1));
-	$number_plate = $num_plate_1 . " " . $num_plate_2;
+	$num_plate_1 = $_POST['num_plate_1'];
+	$num_plate_2 = $_POST['num_plate_2'];
+	$number_plate = format_number_plate($num_plate_1, $num_plate_2);
 
 	$taken_plate = unique_registration($number_plate);
 	if ($taken_plate == "Taken") {
@@ -106,8 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	// vehicle basics data
-	$make = ucfirst($_POST['make']);
-	$model = ucfirst($_POST['model']);
+	$make = ucwords($_POST['make']);
+	$model = ucwords($_POST['model']);
 	// $number_plate = $_POST['number_plate'];
 	$category = $_POST['category'];
 	$transmission = $_POST['transmission'];
@@ -225,3 +225,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	exit;
 }
 ?>
+

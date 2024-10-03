@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$result = save_customer($first_name, $last_name, $email, $id_type, $id_number, $dl_number, $dl_expiry, $tel, $residential_address, $work_address, $date_of_birth);
 
 	if ($result == "Success") {
-		$msg = "Successfully created customers";
+		$msg = "Successfully added $first_name";
 		header("Location: index.php?page=customers/all&msg=$msg");
 	} else {
 		$msg = "An error occured";
