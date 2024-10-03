@@ -1,7 +1,7 @@
 <?php
 // THIS SCRIPT WILL HANDLE THE NEW CUSTOMER FORM PROCESSING
 
-$first_name = $last_name = $email = $id_type = $tel = $residential_address = $work_address = $date_of_birth = $account_id = '';
+$first_name = $last_name = $email = $id_type = $id_number = $dl_number = $dl_expiry = $tel = $residential_address = $work_address = $date_of_birth = $account_id = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//VALIDATIONS
 	if (empty($_POST['first_name'])) {
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// 	$work_address_err = "Required";
 	// 	header("Location: index.php?page=customers/new&work_address_err=$work_address_err");
 	// 	exit;
-	}
+	// }
 	if (empty($_POST['date_of_birth'])) {
 		$date_of_birth_err = "Required";
 		header("Location: index.php?page=customers/new&date_of_birth_err=$date_of_birth_err");
