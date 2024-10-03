@@ -93,7 +93,7 @@ $account_id = $_SESSION['account']['id'];
                                 <label for="date_of_birth">DL Expiry</label>
                                 <div class="input-group date" id="dl_expiry" data-target-input="nearest">
                                     <input type="text" name="dl_expiry" class="form-control datetimepicker-input" data-target="#dl_expiry"/>
-                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                    <div class="input-group-append" data-target="#dl_expiry" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
