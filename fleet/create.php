@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 	if (empty($_POST['num_plate_2'])) {
 		$num_plate_2_err = "Required";
-		header("Location: index.php?page=fleet/new&$num_plate_2_err=$num_plate_2_err");
+		header("Location: index.php?page=fleet/new&num_plate_2_err=$num_plate_2_err");
 		exit;
 	} elseif (strlen($_POST['num_plate_2']) != 4) {
 		$num_plate_2_err = "Atleast 4 characters required";
-		header("Location: index.php?page=fleet/new&$num_plate_2_err=$num_plate_2_err");
+		header("Location: index.php?page=fleet/new&num_plate_2_err=$num_plate_2_err");
 		exit;
 	}
 
@@ -130,34 +130,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$deposit = intval(preg_replace('/[^\d.]/', '', $deposit));
 
 	// vehicle extras
-	if (isset($_POST['bluetooth'])) {
+	if (!(empty($_POST['bluetooth']))) {
 		$bluetooth = $_POST['bluetooth'];
 	}
 
-	if (isset($_POST['keyless_entry'])) {
+	if (!(empty($_POST['keyless_entry']))) {
 		$keyless_entry = $_POST['keyless_entry'];
 	}
 
-	if (isset($_POST['reverse_cam'])) {
+	if (!(empty($_POST['reverse_cam']))) {
 		$reverse_cam = $_POST['reverse_cam'];
 	}
 
-	if (isset($_POST['audio_input'])) {
+	if (!(empty($_POST['audio_input']))) {
 		$audio_input = $_POST['audio_input'];
 	}
 
-	if (isset($_POST['gps'])) {
+	if (!(empty($_POST['gps']))) {
 		$gps = $_POST['gps'];
 	}
 
-	if (isset($_POST['android_auto'])) {
+	if (!(empty($_POST['android_auto']))) {
 		$android_auto = $_POST['android_auto'];
 	}
 
-	if (isset($_POST['apple_carplay'])) {
+	if (!(empty($_POST['apple_carplay']))) {
 		$apple_carplay = $_POST['apple_carplay'];
 	}
-	if (isset($_POST['sunroof'])) {
+	if (!(empty($_POST['sunroof']))) {
 		$sunroof = $_POST['sunroof'];
 	}
 

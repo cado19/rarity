@@ -61,7 +61,7 @@ if (isset($_GET['id'])) {
                         <b>National ID</b> <a class="float-right"><?php echo $customer['id_no']; ?></a>
                       </li>
                       <li class="list-group-item">
-                        <b>Tel</b> <a class="float-right">254<?php echo ($customer['phone_no']); ?></a>
+                        <b>Tel</b> <a class="float-right"><?php echo ($customer['phone_no']); ?></a>
                       </li>
                     </ul>
 
