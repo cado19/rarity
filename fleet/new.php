@@ -89,6 +89,7 @@ $account_id = $_SESSION['account']['id'];
                                         <option value="Small Car "> Small Car </option>
                                         <option value="Safari"> Safari </option>
                                         <option value="Luxury"> Luxury </option>
+                                        <option value="Commercial"> Commercial </option>
                                 </select>
                                 <?php if (isset($_GET['category_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['category_err']; ?></p>
