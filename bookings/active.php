@@ -1,5 +1,9 @@
 <?php
 // THIS PAGE SHOWS ALL ACTIVE BOOKINGS
+// head to login screen if user is not signed in.
+include_once 'config/session_script.php';
+
+// head to home screen if user is not adm
 //page name. We set this inn the content start and also in the page title programatically
 $page = "Bookings";
 
