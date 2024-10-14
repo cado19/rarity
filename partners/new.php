@@ -1,4 +1,5 @@
 <?php
+// THIS PAGE DISPLAYS A FORM TO INPUT NEW PARTNER DETAILS 
 $page = "New Partner";
 
 // Navbar Links. We set these link in the navbar programatically.
