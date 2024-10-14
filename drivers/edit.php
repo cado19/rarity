@@ -1,4 +1,9 @@
 <?php
+// THIS PAGE IS FOR EDITING A DRIVER'S DETAILS 
+
+// head to login screen if user is not signed in.
+include_once 'config/session_script.php';
+
 $page = "New Driver";
 
 // Navbar Links. We set these link in the navbar programatically.
