@@ -54,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		header("Location: index.php?page=bookings/new&err_msg=$err");
 		exit;
 	} else {
+
+		// CREATE A CONTRACT WITH THE CURRENT LAST BOOKING ID AS THE REFERENCE ID (THIS JUST MIGHT BE IN THE FUNCTIONS FILE)
+		$response = create_contract($result);
+
 		//GET BOOKING USING LAST INSERT ID
 		$booking = booking($result);
 
@@ -61,10 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		$total = $booking['daily_rate'] * $duration;
 
 		// UPDATE THE TOTAL PRICE
-		$total = update_booking($total, $result);
-
-		// CREATE A CONTRACT WITH THE CURRENT LAST BOOKING ID AS THE REFERENCE ID (THIS JUST MIGHT BE IN THE FUNCTIONS FILE)
-		$response = create_contract($result);
+		$res = update_booking($total, $result);
 
 		//REDIRECT TO THE CONTRACT PAGE SO THAT A SIGNATURE CAN BE UPLOADED IF IT IS AVAILABLE
 		$msg = "Booking created";
@@ -80,5 +81,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 ?>
 <script>
-	console.log(<?php echo json_encode($posts); ?>);
+	console.log(<?php echo json_encode($result); ?>);
 </script>

@@ -91,32 +91,34 @@ $link .= "?page=contracts/edit&id=${id}";
     <div class="container">
         <div class="row h-100 d-flex justify-content-center align-items-center">
             <div class="col-8">
-            <div class="card shadow">
-                <div class="card-header">
-                    <h1 class="card-title">Digital Signature</h1>
-                </div>
-                <div class="card-body">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h1 class="card-title">Digital Signature</h1>
+                    </div>
+                    <div class="card-body">
 
-                    <form method="post" action="contracts/update.php" enctype="multipart/form-data">
-                        <!-- pass the contract id as a hidden input field  -->
-                        <input type="hidden" name="id" value="<?php echo $new_id; ?>">
-                        <div id="signature-pad">
-                            <div style="border:solid 1px teal; width:360px;height:110px;padding:3px;position:relative;">
-                                <div id="note" onmouseover="my_function();">The signature should be inside box</div>
-                                <canvas id="the_canvas" width="350px" height="100px"></canvas>
+                        <form method="post" action="contracts/update.php" enctype="multipart/form-data">
+                            <!-- pass the contract id as a hidden input field  -->
+                            <input type="hidden" name="id" value="<?php echo $new_id; ?>">
+                            <div id="signature-pad">
+                                <div style="border:solid 1px teal; width:360px;height:110px;padding:3px;position:relative;">
+                                    <div id="note" onmouseover="my_function();">The signature should be inside box</div>
+                                    <canvas id="the_canvas" width="350px" height="100px"></canvas>
+                                </div>
+                                <div style="margin:10px;">
+                                    <input type="hidden" id="signature" name="signature">
+                                    <button type="button" id="clear_btn" class="btn btn-danger" data-action="clear"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+                                    <button type="submit" id="save_btn" class="btn btn-primary" data-action="save-png"><span class="glyphicon glyphicon-ok"></span> Save as PNG</button>
+                                </div>
                             </div>
-                            <div style="margin:10px;">
-                                <input type="hidden" id="signature" name="signature">
-                                <button type="button" id="clear_btn" class="btn btn-danger" data-action="clear"><span class="glyphicon glyphicon-remove"></span> Clear</button>
-                                <button type="submit" id="save_btn" class="btn btn-primary" data-action="save-png"><span class="glyphicon glyphicon-ok"></span> Save as PNG</button>
-                            </div>
-                        </div>
-                    <form>
-                    <div class="row">
+                        <form>
 
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col-4">
+                <a href="index.php?page=contracts/updated_contract&id=<?php echo $id; ?>" class="btn btn-success" target="_blank">View contract</a>
+            </div>            
         </div>
 
     </div>
