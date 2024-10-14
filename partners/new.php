@@ -2,6 +2,9 @@
 // THIS PAGE DISPLAYS A FORM TO INPUT NEW PARTNER DETAILS 
 $page = "New Partner";
 
+// head to home screen if user is not admin.
+include_once 'config/user_auth_script.php';
+
 // Navbar Links. We set these link in the navbar programatically.
 $home_link = "index.php?page=partners/all";
 $home_link_name = "All Partners";
