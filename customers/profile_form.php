@@ -1,10 +1,7 @@
 <?php
 // THIS PAGE DISPLAYS ALLOWS A SELF REGISTERED CUSTOMER TO UPLOAD PROFILE IMAGE
-session_start();
-if (!(isset($_SESSION['client']))) {
-	header("Location: index.php?page=client/auth/login");
-	exit;
-}
+// head to login screen if user is not signed in.
+include_once 'config/session_script.php';
 
 $page = "Upload Profile Picture";
 

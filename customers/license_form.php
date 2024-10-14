@@ -1,6 +1,9 @@
 <?php
 // THIS PAGE WILL DISPLAY A FORM FOR UPLOADING A CLIENT'S ID CARD IMAGE
 
+// head to login screen if user is not signed in.
+include_once 'config/session_script.php';
+
 //page name. We set this inn the content start and also in the page title programatically
 $page = "Upload Customer ID";
 
