@@ -23,7 +23,7 @@ $log->info('contract:', $contract);
 				<tbody>
 					<tr><td><b>HIRER FULL NAME</b></td></tr>
 					<tr><td><b> <?php show_value($contract, 'c_fname');?> <?php show_value($contract, 'c_lname');?></b></td></tr>
-					<tr><td>DRIVER: [driver]</td></tr>
+					<tr><td>DRIVER: <?php show_value($contract, 'first_name');?> <?php show_value($contract, 'last_name');?></td></tr>
 					<tr><td>HIRER PHYSICAL ADDRESS: <?php show_value($contract, 'residential_address');?></td></tr>
 					<tr><td>REFEREE NAME</td></tr>
 					<tr><td>REFEREE ID NO</td><td>SIGN</td><td>TEL NO</td></tr>
@@ -50,7 +50,7 @@ $log->info('contract:', $contract);
 				<td><b>D.L NO.</b></td>
 				<td></td>
 				<td><b>KMS IN</b></td>
-				<td><b>COST X DAYS=</b></td>
+				<td><b>COST X DAYS= <?php show_numeric_value($contract, 'total');?></b></td>
 				<td></td>
 			</tr>
 			<tr>
