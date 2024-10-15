@@ -1,4 +1,3 @@
-<?php include_once 'config/session_script.php';?>
 
 <!DOCTYPE html>
 <html lang="en">
