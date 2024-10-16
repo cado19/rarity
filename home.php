@@ -1,32 +1,35 @@
 <?php
-// FOR NOW THIS WILL BE THE HOME DASHBOARD. WE'LL CUSTOMIZE IT AS THE APP GROWS
+    // FOR NOW THIS WILL BE THE HOME DASHBOARD. WE'LL CUSTOMIZE IT AS THE APP GROWS
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "Dashboard";
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php";
-$home_link_name = "Home";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "Dashboard";
 
-$new_link = "index.php";
-$new_link_name = "Dashboard";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php";
+    $home_link_name = "Home";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Home";
-$breadcrumb_active = "Dashboard";
+    $new_link      = "index.php";
+    $new_link_name = "Dashboard";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Home";
+    $breadcrumb_active = "Dashboard";
 
-$account_id = $_SESSION['account']['id'];
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
-$vehicle_count = vehicle_count();
-$customer_count = customer_count();
-$active_bookings = home_active_bookings();
-$partner_count = partner_count();
-$bookings = home_bookings();
+    $account_id = $_SESSION['account']['id'];
 
-$log->info('bookings', $bookings);
+    $vehicle_count   = vehicle_count();
+    $customer_count  = customer_count();
+    $active_bookings = home_active_bookings();
+    $partner_count   = partner_count();
+    $bookings        = home_bookings();
+
+    $log->info('bookings', $bookings);
 ?>
 
 
@@ -102,16 +105,6 @@ $log->info('bookings', $bookings);
 
              </div>
 
-             <div class="row">
-                 <div class="col-12">
-                     <div class="card">
-                         <div class="card-body">
-                            <label>Customer Self Sign Up Link</label>
-                            <input type="text" name="self-sign" value="www.kizusi-rental.com/index.php?page=client/auth/signup" id="" class="form-control form-control-border">
-                         </div>
-                     </div>
-                 </div>
-             </div>
 
              <div class="row">
                 <div class="col-12">
@@ -137,22 +130,22 @@ $log->info('bookings', $bookings);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php forEach ($bookings as $booking): ?>
+                                        <?php foreach ($bookings as $booking): ?>
                                             <tr>
-                                                <td> <?php echo $booking['first_name']; ?> <?php echo $booking['last_name']; ?> </td>
-                                                <td> <?php echo $booking['model']; ?> <?php echo $booking['make']; ?> </td>
-                                                <td> <?php echo $booking['number_plate']; ?> </td>
+                                                <td>                                                                                                         <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?> </td>
+                                                <td>                                                                                                         <?php echo $booking['model']; ?><?php echo $booking['make']; ?> </td>
+                                                <td>                                                                                                         <?php echo $booking['number_plate']; ?> </td>
                                                 <td>
                                                     <?php
-$start = strtotime($booking['start_date']);
-echo date("l jS \of F Y", $start);
-?>
+                                                        $start = strtotime($booking['start_date']);
+                                                        echo date("l jS \of F Y", $start);
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <?php
-$end = strtotime($booking['end_date']);
-echo date("l jS \of F Y", $end);
-?>
+                                                        $end = strtotime($booking['end_date']);
+                                                        echo date("l jS \of F Y", $end);
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach;?>
