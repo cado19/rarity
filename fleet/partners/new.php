@@ -81,6 +81,7 @@ $partners = partners_for_vehicle();
                                 <label for="category">Category</label>
                                 <select name="category" class="form-control form-control-border">
                                         <option value="">--Please choose an option--</option>
+                                        <option value="Mid-size SUV"> SUV </option>
                                         <option value="Mid-size SUV"> Mid Size SUV </option>
                                         <option value="Mid-size SUV"> Crossover SUV </option>
                                         <option value="Medium Car"> Medium Car </option>
