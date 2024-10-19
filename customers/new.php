@@ -78,7 +78,7 @@ $account_id = $_SESSION['account']['id'];
 
                             <div class="form-group">
                                 <label for="id">Id Number</label>
-                                <input type="text" name="id_number" class="form-control form-control-border" required>
+                                <input type="text" name="id_number" class="form-control form-control-border" >
                                 <?php if (isset($_GET['id_no_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['id_no_err']; ?></p>
                                 <?php endif;?>
@@ -86,7 +86,7 @@ $account_id = $_SESSION['account']['id'];
 
                             <div class="form-group">
                                 <label for="id">DL Number</label>
-                                <input type="text" name="dl_number" class="form-control form-control-border" required>
+                                <input type="text" name="dl_number" class="form-control form-control-border" >
                                 <?php if (isset($_GET['dl_no_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['dl_no_err']; ?></p>
                                 <?php endif;?>
@@ -110,7 +110,7 @@ $account_id = $_SESSION['account']['id'];
                             <div class="form-group">
                                 <label for="tel">Tel</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="tel" placeholder="Include country code" class="form-control form-control-border" required>
+                                    <input type="text" name="tel" placeholder="Include country code" class="form-control form-control-border" >
                                     <?php if (isset($_GET['tel_err'])): ?>
                                         <p class="text-danger"><?php echo $_GET['tel_err']; ?></p>
                                     <?php endif;?>
@@ -119,7 +119,7 @@ $account_id = $_SESSION['account']['id'];
 
                             <div class="form-group">
                                 <label for="residential_address">Residential Address</label>
-                                <input type="text" name="residential_address" class="form-control form-control-border" required>
+                                <input type="text" name="residential_address" class="form-control form-control-border" >
                                 <?php if (isset($_GET['residential_address_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['residential_address_err']; ?></p>
                                 <?php endif;?>
