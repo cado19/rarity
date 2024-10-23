@@ -17,6 +17,8 @@
 
 <?php include_once 'config/notifications.php';?>
 
+<script src="assets/phone.js"></script>
+
 <script>
     $(document).ready(function(){
         //Date picker
