@@ -44,8 +44,12 @@
       <!-- OUR CSS  -->
       <link rel="stylesheet" href="assets/style.css">
 
-      <!-- Intl Tel CSS -->
-      <link rel="stylesheet" href="assets/build/css/intlTelInput.css">
+     <!-- Intl Tel CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+
+    <!-- Intl Tel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
 
 
@@ -54,7 +58,7 @@
 
 
 
-    <title>Rental | <?php echo $page; ?></title>
+    <title>Rental |                    <?php echo $page; ?></title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <style>
       #note{position:absolute;left:50px;top:35px;padding:0px;margin:0px;cursor:default;}

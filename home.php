@@ -105,6 +105,17 @@
 
              </div>
 
+              <div class="row">
+                 <div class="col-12">
+                     <div class="card">
+                         <div class="card-body">
+                            <p id="customer-link" class="d-none">www.raritycars.com/index.php?page=client/register/new</p>
+                            <button onclick="copyToClipboard('#customer-link')" class="btn btn-primary">Copy Customer Link</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
 
              <div class="row">
                 <div class="col-12">
@@ -132,9 +143,9 @@
                                     <tbody>
                                         <?php foreach ($bookings as $booking): ?>
                                             <tr>
-                                                <td>                                                                                                         <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?> </td>
-                                                <td>                                                                                                         <?php echo $booking['model']; ?><?php echo $booking['make']; ?> </td>
-                                                <td>                                                                                                         <?php echo $booking['number_plate']; ?> </td>
+                                                <td>                                                                                                                                                             <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?> </td>
+                                                <td>                                                                                                                                                             <?php echo $booking['model']; ?><?php echo $booking['make']; ?> </td>
+                                                <td>                                                                                                                                                             <?php echo $booking['number_plate']; ?> </td>
                                                 <td>
                                                     <?php
                                                         $start = strtotime($booking['start_date']);

@@ -17,11 +17,18 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="assets/daterangepicker.css">
 
+        <!-- Intl Tel CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+
+    <!-- Intl Tel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 	<!-- OUR CSS  -->
 	<link rel="stylesheet" href="assets/client.css">
 
 
-	<title>Rental | <?php echo $page; ?></title>
+	<title>Rental |	                <?php echo $page; ?></title>
 </head>
 <body>
 
