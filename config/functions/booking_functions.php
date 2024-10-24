@@ -192,7 +192,7 @@ function booking($id)
 
         $con->beginTransaction();
 
-        $sql  = "SELECT c.first_name, c.last_name, v.model, v.make, v.number_plate, v.drive_train, v.category, v.seats, vp.daily_rate, b.start_date, b.end_date, b.total, b.status, ct.status AS signature_status FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id INNER JOIN vehicle_pricing vp ON b.vehicle_id = vp.vehicle_id INNER JOIN contracts ct ON b.id = ct.booking_id WHERE b.id = ?";
+        $sql  = "SELECT c.first_name, c.last_name, v.model, v.make, v.number_plate, v.drive_train, cat.name AS category, v.seats, vp.daily_rate, b.start_date, b.end_date, b.total, b.status, b.booking_no, ct.status AS signature_status FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id INNER JOIN vehicle_pricing vp ON b.vehicle_id = vp.vehicle_id INNER JOIN contracts ct ON b.id = ct.booking_id INNER JOIN vehicle_categories cat ON v.category_id = cat.id WHERE b.id = ?";
         $stmt = $con->prepare($sql);
         $stmt->execute([$id]);
         $res = $stmt->fetch();
@@ -380,6 +380,25 @@ function save_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start
     return $res;
 }
 
+// function to insert booking number into the database
+function save_booking_number($id, $number)
+{
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+        $sql  = "UPDATE bookings SET booking_no = ? WHERE id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$number, $id]);
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+}
+
+// function to activate booking
 function activate_booking($id)
 {
     global $con;
