@@ -22,7 +22,11 @@
     include_once 'partials/header.php';
     include_once 'partials/content_start.php';
     $account_id = $_SESSION['account']['id'];
+    $categories = categories();
 ?>
+<script>
+    console.log(<?php echo json_encode($categories); ?>);
+</script>
 
 <section class="content">
     <div class="container-fluid">
@@ -89,13 +93,9 @@
                                 <label for="category">Category</label>
                                 <select name="category" class="form-control form-control-border">
                                         <option value="">--Please choose an option--</option>
-                                        <option value="Mid-size SUV"> Mid Size SUV </option>
-                                        <option value="SUV"> SUV </option>
-                                        <option value="Medium Car"> Medium Car </option>
-                                        <option value="Small Car "> Small Car </option>
-                                        <option value="Safari"> Safari </option>
-                                        <option value="Luxury"> Luxury </option>
-                                        <option value="Commercial"> Commercial </option>
+                                        <?php foreach ($categories as $category): ?>
+                                            <option value="<?php echo $category['id'] ?>"><?php echo $category['name'] ?></option>
+                                        <?php endforeach;?>
                                 </select>
                                 <?php if (isset($_GET['category_err'])): ?>
                                     <p class="text-danger"><?php echo $_GET['category_err']; ?></p>
