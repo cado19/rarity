@@ -65,9 +65,9 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Date of Birth</label>
             <div class="col-sm-10">
-	            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input type="text" name="date_of_birth" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+	            <div class="input-group date" id="birthdate" data-target-input="nearest">
+                    <input type="text" name="date_of_birth" class="form-control datetimepicker-input" data-target="#birthdate"/>
+                    <div class="input-group-append" data-target="#birthdate" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
                 </div>
@@ -97,6 +97,17 @@
                 <p class="text-danger"><?php echo $_GET['id_number_err']; ?></p>
             <?php endif;?>
           </div>
+          <!-- DL Number  -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">DL Number</label>
+            <div class="col-sm-10">
+              <input type="text" name="dl_number" class="form-control">
+            </div>
+            <?php if (isset($_GET['id_number_err'])): ?>
+                <p class="text-danger"><?php echo $_GET['id_number_err']; ?></p>
+            <?php endif;?>
+          </div>
+
 
           <!-- DL Expiry  -->
           <div class="form-group">

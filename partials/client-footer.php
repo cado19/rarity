@@ -25,6 +25,10 @@
         $('#birthdate').datetimepicker({
             format: 'YYYY-MM-DD'
         });
+        $('#dl_expiry').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
     });
 </script>
 
