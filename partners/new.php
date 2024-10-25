@@ -1,25 +1,28 @@
 <?php
-// THIS PAGE DISPLAYS A FORM TO INPUT NEW PARTNER DETAILS 
-$page = "New Partner";
+    // THIS PAGE DISPLAYS A FORM TO INPUT NEW PARTNER DETAILS
+    $page = "New Partner";
 
-// head to home screen if user is not admin.
-include_once 'config/user_auth_script.php';
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=partners/all";
-$home_link_name = "All Partners";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-$new_link = "index.php?page=partners/new";
-$new_link_name = "New Partner";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=partners/all";
+    $home_link_name = "All Partners";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Partners";
-$breadcrumb_active = "New Partner";
+    $new_link      = "index.php?page=partners/new";
+    $new_link_name = "New Partner";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Partners";
+    $breadcrumb_active = "New Partner";
 
-$account_id = $_SESSION['account']['id'];
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+
+    $account_id = $_SESSION['account']['id'];
 ?>
 
 <main>

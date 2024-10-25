@@ -1,72 +1,72 @@
 <?php
-// THIS PAGE IS WHERE THE CONTRACT WILL BE SIGNED
+    // THIS PAGE IS WHERE THE CONTRACT WILL BE SIGNED
 
-// our database configuration
-include_once '../db_credentials/credentials.php';
+    // our database configuration
+    include_once '../db_credentials/credentials.php';
 
-// DATABASE DRIVER
-$DBDRIVER = "mysql";
+    // DATABASE DRIVER
+    $DBDRIVER = "mysql";
 
-// DATABASE HOST
-$DBHOST = "localhost";
+    // DATABASE HOST
+    $DBHOST = "localhost";
 
-// DATABASE USER USERNAME
-$DBUSER = $DBUSERNAME;
+    // DATABASE USER USERNAME
+    $DBUSER = $DBUSERNAME;
 
-// DATABASE USER PASSWORD
-$DBPASS = $DBPASSWORD;
+    // DATABASE USER PASSWORD
+    $DBPASS = $DBPASSWORD;
 
-// DATABASE NAME
-$DBNAME = "rarity-rental";
+    // DATABASE NAME
+    $DBNAME = "rarity-rental";
 
-try {
-	$con = new PDO("$DBDRIVER:host=$DBHOST;dbname=$DBNAME", $DBUSER, $DBPASS);
-	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-	echo $e->getMessage();
-}
+    try {
+        $con = new PDO("$DBDRIVER:host=$DBHOST;dbname=$DBNAME", $DBUSER, $DBPASS);
+        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 
-// get booking id from the url
-$id = "";
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-}
+    // get booking id from the url
+    $id = "";
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
 
-// use the id from the url to fetch the contract id for the contract that needs to be signed
-$sql = "SELECT id from contracts WHERE booking_id = ?";
-$stmt = $con->prepare($sql);
-$stmt->execute([$id]);
-$contract_id = $stmt->fetch(PDO::FETCH_ASSOC);
+    // use the id from the url to fetch the contract id for the contract that needs to be signed
+    $sql  = "SELECT id from contracts WHERE booking_id = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->execute([$id]);
+    $contract_id = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$new_id = $contract_id['id'];
+    $new_id = $contract_id['id'];
 
-$path = $_SERVER['DOCUMENT_ROOT'] . "/contracts/update.php";
+    $path = $_SERVER['DOCUMENT_ROOT'] . "/contracts/update.php";
 
-// get page url
-// Program to display complete URL
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-	$link = "https";
-} else {
-	$link = "http";
-}
+    // get page url
+    // Program to display complete URL
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $link = "https";
+    } else {
+        $link = "http";
+    }
 
-// Here append the common URL characters
-$link .= "://";
+    // Here append the common URL characters
+    $link .= "://";
 
-// Append the host(domain name,
-// ip) to the URL.
-$link .= $_SERVER['HTTP_HOST'];
+    // Append the host(domain name,
+    // ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
 
-// Append the requested resource
-// location to the URL
-$link .= $_SERVER['PHP_SELF'];
+    // Append the requested resource
+    // location to the URL
+    $link .= $_SERVER['PHP_SELF'];
 
-$link .= "?page=contracts/edit&id=${id}";
+    $link .= "?page=contracts/edit&id=${id}";
 
-// echo $new_id;
+    // echo $new_id;
 
-// $log->info($new_id);
-// $log->warning($id);
+    // $log->info($new_id);
+    // $log->warning($id);
 ?>
 <!DOCTYPE html>
 <html>
@@ -118,7 +118,8 @@ $link .= "?page=contracts/edit&id=${id}";
             </div>
             <div class="col-4">
                 <a href="index.php?page=contracts/updated_contract&id=<?php echo $id; ?>" class="btn btn-success" target="_blank">View contract</a>
-            </div>            
+                <a href="index.php?page=bookings/show&id=<?php echo $id; ?>" class="btn btn-warning">Back to booking</a>
+            </div>
         </div>
 
     </div>

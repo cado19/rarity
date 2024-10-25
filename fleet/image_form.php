@@ -1,30 +1,33 @@
 <?php
-// THIS PAGE WILL DISPLAY A FORM FOR UPLOADING A CAR'S IMAGE
+    // THIS PAGE WILL DISPLAY A FORM FOR UPLOADING A CAR'S IMAGE
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "Upload Vehicle Image";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=vehicles/all";
-$home_link_name = "All vehicles";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "Upload Vehicle Image";
 
-$new_link = "index.php?page=vehicles/new";
-$new_link_name = "New Vehicle";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=vehicles/all";
+    $home_link_name = "All vehicles";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Fleet";
-$breadcrumb_active = "Upload Vehicle Image";
+    $new_link      = "index.php?page=vehicles/new";
+    $new_link_name = "New Vehicle";
 
-// GET VEHICLE ID FROM URL
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-}
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Fleet";
+    $breadcrumb_active = "Upload Vehicle Image";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // GET VEHICLE ID FROM URL
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
+
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
 ?>
 

@@ -1,33 +1,36 @@
 <?php
-// THIS PAGE DISPLAYS A FORM TO EDIT A VEHICLE 
+    // THIS PAGE DISPLAYS A FORM TO EDIT A VEHICLE
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-$page = "New Driver";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=fleet/all";
-$home_link_name = "All Drivers";
+    $page = "New Driver";
 
-$new_link = "index.php?page=fleet/new";
-$new_link_name = "New Driver";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=fleet/all";
+    $home_link_name = "All Drivers";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Drivers";
-$breadcrumb_active = "New Driver";
+    $new_link      = "index.php?page=fleet/new";
+    $new_link_name = "New Driver";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Drivers";
+    $breadcrumb_active = "New Driver";
 
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-	$vehicle = get_vehicle($id);
-	$log->info('Foo: ', $vehicle);
-} else {
-	$msg = "Couldn't fetch fetch vehicle";
-	header("Location: index.php?page=fleet/all&msg=$msg");
-}
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+
+    if (isset($_GET['id'])) {
+        $id      = $_GET['id'];
+        $vehicle = get_vehicle($id);
+        $log->info('Foo: ', $vehicle);
+    } else {
+        $msg = "Couldn't fetch fetch vehicle";
+        header("Location: index.php?page=fleet/all&msg=$msg");
+    }
 
 ?>
 

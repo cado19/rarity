@@ -1,37 +1,40 @@
 <?php
-// THIS FILE CONTAINS THE FORM FOR CREATING A NEW CUSTOMER
+    // THIS FILE CONTAINS THE FORM FOR CREATING A NEW CUSTOMER
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "Editing Client";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=customers/all";
-$home_link_name = "All Clients";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "Editing Client";
 
-$new_link = "index.php?page=customers/new";
-$new_link_name = "New Client";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=customers/all";
+    $home_link_name = "All Clients";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Clients";
-$breadcrumb_active = "New Client";
+    $new_link      = "index.php?page=customers/new";
+    $new_link_name = "New Client";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Clients";
+    $breadcrumb_active = "New Client";
 
-// fetch id from url and use to fetch client record from database
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-	$customer = get_customer($id);
-	$log->info('Foo: ', $customer);
-} else {
-	$error = "An error occured";
-	header("Location: index.php?page=customers/all&msg=$error");
-}
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
-$account_id = $_SESSION['account']['id'];
+    // fetch id from url and use to fetch client record from database
+    if (isset($_GET['id'])) {
+        $id       = $_GET['id'];
+        $customer = get_customer($id);
+        $log->info('Foo: ', $customer);
+    } else {
+        $error = "An error occured";
+        header("Location: index.php?page=customers/all&msg=$error");
+    }
+
+    $account_id = $_SESSION['account']['id'];
 ?>
 <?php if (array_key_exists('dl_number', $customer)): ?>
     <script>

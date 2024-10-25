@@ -1,28 +1,31 @@
 <?php
-// THIS PAGE OUGHT TO DISPLAY A FORM TO COLLECT A VEHICLE'S ISSUE
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // THIS PAGE OUGHT TO DISPLAY A FORM TO COLLECT A VEHICLE'S ISSUE
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-$page = "New Issue";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=fleet/all";
-$home_link_name = "All Vehicles";
+    $page = "New Issue";
 
-$new_link = "index.php?page=fleet/new";
-$new_link_name = "New Vehicle";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=fleet/all";
+    $home_link_name = "All Vehicles";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Vehicles";
-$breadcrumb_active = "New Issue";
+    $new_link      = "index.php?page=fleet/new";
+    $new_link_name = "New Vehicle";
 
-if (isset($_GET['vehicle_id'])) {
-	$vehicle_id = $_GET['vehicle_id'];
-}
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Vehicles";
+    $breadcrumb_active = "New Issue";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
-$account_id = $_SESSION['account']['id'];
+    if (isset($_GET['vehicle_id'])) {
+        $vehicle_id = $_GET['vehicle_id'];
+    }
+
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+    $account_id = $_SESSION['account']['id'];
 ?>
 
 <section class="content">

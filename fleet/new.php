@@ -1,24 +1,27 @@
 <?php
-// THIS PAGE OUGHT TO DISPLAY A FORM TO COLLECT VEHICLE DATA
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // THIS PAGE OUGHT TO DISPLAY A FORM TO COLLECT VEHICLE DATA
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-$page = "New Vehicle";
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=fleet/all";
-$home_link_name = "All Vehicles";
+    $page = "New Vehicle";
 
-$new_link = "index.php?page=fleet/new";
-$new_link_name = "New Vehicle";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=fleet/all";
+    $home_link_name = "All Vehicles";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Vehicles";
-$breadcrumb_active = "New Vehicle";
+    $new_link      = "index.php?page=fleet/new";
+    $new_link_name = "New Vehicle";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
-$account_id = $_SESSION['account']['id'];
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Vehicles";
+    $breadcrumb_active = "New Vehicle";
+
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+    $account_id = $_SESSION['account']['id'];
 ?>
 
 <section class="content">

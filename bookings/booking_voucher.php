@@ -25,10 +25,11 @@
     <div class="row d-flex justify-content-center">
         <div class="col-6">
             <h2 class="text-center">Booking Voucher</h2>
+            <p><b>Booking No:</b><?php echo " "; ?><?php show_value($voucher, 'booking_no');?></p>
             <p><b>Client:</b><?php echo " "; ?><?php show_value($voucher, 'first_name');?><?php echo " "; ?><?php show_value($voucher, 'last_name');?></p>
             <p><b>Vehicle:</b><?php echo " "; ?><?php show_value($voucher, 'make');?><?php echo " "; ?><?php show_value($voucher, 'model');?> </p>
             <p><b>Registration:</b><?php echo " "; ?><?php show_value($voucher, 'number_plate');?></p>
-            <p><b>Total:</b><?php echo " "; ?><?php show_value($voucher, 'total');?> </p>
+            <p><b>Total:</b><?php echo " "; ?><?php show_numeric_value($voucher, 'total');?> </p>
             <p><b>Start Date:</b><?php echo " "; ?><?php echo date("l jS \of F Y", $start_date); ?></p>
             <p><b>End Date:</b><?php echo " "; ?><?php echo date("l jS \of F Y", $end_date); ?> </p>
             <p><b>Start Time:</b><?php echo " "; ?><?php show_value($voucher, 'start_time');?></p>
