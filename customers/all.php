@@ -60,10 +60,10 @@
                             <tbody>
                                 <?php foreach ($customers as $customer): ?>
                                     <tr>
-                                        <td>                                             <?php echo $customer['first_name']; ?><?php echo $customer['last_name']; ?> </td>
-                                        <td>                                             <?php echo $customer['email']; ?> </td>
-                                        <td>                                             <?php echo $customer['id_no']; ?> </td>
-                                        <td>                                             <?php echo $customer['phone_no']; ?> </td>
+                                        <td><?php show_value($customer, 'first_name');?><?php echo " "; ?><?php show_value($customer, 'last_name');?> </td>
+                                        <td><?php show_value($customer, 'email');?> </td>
+                                        <td><?php show_value($customer, 'id_no');?> </td>
+                                        <td><?php show_value($customer, 'phone_no');?> </td>
                                         <td> <a href="index.php?page=customers/show&id=<?php echo $customer['id']; ?>">Details</a> </td>
                                     </tr>
                                 <?php endforeach;?>

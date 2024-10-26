@@ -1,34 +1,34 @@
 <?php
-// THIS FILE WILL DISPLAY AN INDIVIDUAL CUSTOMER
+    // THIS FILE WILL DISPLAY AN INDIVIDUAL CUSTOMER
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "Showing Client";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "Showing Client";
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=customers/all";
-$home_link_name = "All Customers";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=customers/all";
+    $home_link_name = "All Customers";
 
-$new_link = "index.php?page=customers/new";
-$new_link_name = "New Customers";
+    $new_link      = "index.php?page=customers/new";
+    $new_link_name = "New Customers";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Customers";
-$breadcrumb_active = "Customer";
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Customers";
+    $breadcrumb_active = "Customer";
 
-// include navbar, functions, db_conn and sidebar
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    // include navbar, functions, db_conn and sidebar
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
-// fetch id from url and use to fetch client record from database
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-	$customer = get_customer($id);
-	$bookings = customer_bookings($id);
-	$log->info('Foo: ', $customer);
-}
+    // fetch id from url and use to fetch client record from database
+    if (isset($_GET['id'])) {
+        $id       = $_GET['id'];
+        $customer = get_customer($id);
+        $bookings = customer_bookings($id);
+        $log->info('Foo: ', $customer);
+    }
 
 ?>
 
@@ -52,19 +52,19 @@ if (isset($_GET['id'])) {
 
                     </div>
 
-                    <h3 class="profile-username text-center"><?php echo $customer['first_name']; ?> <?php echo $customer['last_name']; ?></h3>
+                    <h3 class="profile-username text-center"><?php show_value($customer, 'first_name');?><?php echo " "; ?><?php show_value($customer, 'last_name');?></h3>
 
                     <p class="text-muted text-center">customer</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
-                        <b>Driving License No</b> <a class="float-right"><?php echo $customer['dl_no'] ?></a>
+                        <b>Driving License No</b> <a class="float-right"><?php show_value($customer, 'dl_no');?></a>
                       </li>
                       <li class="list-group-item">
-                        <b>National ID</b> <a class="float-right"><?php echo $customer['id_no']; ?></a>
+                        <b>National ID</b> <a class="float-right"><?php show_value($customer, 'id_no');?></a>
                       </li>
                       <li class="list-group-item">
-                        <b>Tel</b> <a class="float-right"><?php echo ($customer['phone_no']); ?></a>
+                        <b>Tel</b> <a class="float-right"><?php show_value($customer, 'phone_no');?></a>
                       </li>
                     </ul>
 
@@ -140,22 +140,22 @@ if (isset($_GET['id'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php forEach ($bookings as $booking): ?>
+                                <?php foreach ($bookings as $booking): ?>
                                     <tr>
-                                        <td> <?php echo $booking['first_name']; ?> <?php echo $booking['last_name']; ?> </td>
-                                        <td> <?php echo $booking['model']; ?> <?php echo $booking['make']; ?> </td>
-                                        <td> <?php echo $booking['number_plate']; ?> </td>
+                                        <td>                                                                                         <?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
+                                        <td>                                                                                         <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
+                                        <td>                                                                                         <?php show_value($booking, 'number_plate');?> </td>
                                         <td>
                                             <?php
-$start = strtotime($booking['start_date']);
-echo date("l jS \of F Y", $start);
-?>
+                                                $start = strtotime($booking['start_date']);
+                                                echo date("l jS \of F Y", $start);
+                                            ?>
                                         </td>
                                         <td>
                                             <?php
-$end = strtotime($booking['end_date']);
-echo date("l jS \of F Y", $end);
-?>
+                                                $end = strtotime($booking['end_date']);
+                                                echo date("l jS \of F Y", $end);
+                                            ?>
                                         </td>
                                         <td> <a href="index.php?page=bookings/show&id=<?php echo $booking['id']; ?>">Details</a> </td>
                                     </tr>
