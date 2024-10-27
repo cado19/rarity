@@ -192,11 +192,32 @@ function booking($id)
 
         $con->beginTransaction();
 
-        $sql  = "SELECT c.first_name, c.last_name, v.model, v.make, v.number_plate, v.drive_train, cat.name AS category, v.seats, vp.daily_rate, b.start_date, b.end_date, b.total, b.status, b.booking_no, ct.status AS signature_status FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id INNER JOIN vehicle_pricing vp ON b.vehicle_id = vp.vehicle_id INNER JOIN contracts ct ON b.id = ct.booking_id INNER JOIN vehicle_categories cat ON v.category_id = cat.id WHERE b.id = ?";
+        $sql  = "SELECT c.first_name, c.last_name, v.model, v.make, v.number_plate, v.drive_train, cat.name AS category, v.seats, vp.daily_rate, b.start_date, b.end_date, b.total, b.status, b.booking_no, b.custom_rate, ct.status AS signature_status FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id INNER JOIN vehicle_pricing vp ON b.vehicle_id = vp.vehicle_id INNER JOIN contracts ct ON b.id = ct.booking_id INNER JOIN vehicle_categories cat ON v.category_id = cat.id WHERE b.id = ?";
         $stmt = $con->prepare($sql);
         $stmt->execute([$id]);
         $res = $stmt->fetch();
 
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+// gets the daily rate of a vehicle in booking after it has just been saved
+function get_booking_vehicle_daily_rate($booking_id)
+{
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "SELECT v.daily_rate FROM vehicle_pricing v INNER JOIN bookings b ON v.vehicle_id = b.vehicle_id WHERE b.id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$booking_id]);
+        $res = $stmt->fetch();
         $con->commit();
     } catch (Exception $e) {
         $con->rollback();
@@ -355,7 +376,7 @@ function booking_drivers()
 }
 
 // function to insert booking into database
-function save_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time)
+function save_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $custom_rate)
 {
     global $con;
     global $res;
@@ -364,9 +385,35 @@ function save_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start
     try {
         $con->beginTransaction();
 
-        $sql  = "INSERT INTO bookings (vehicle_id, customer_id, driver_id, account_id, start_date, end_date, start_time, end_time, status) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql  = "INSERT INTO bookings (vehicle_id, customer_id, driver_id, account_id, start_date, end_date, start_time, end_time, custom_rate, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $status])) {
+        if ($stmt->execute([$v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $status])) {
+            $res = $con->lastInsertId();
+        } else {
+            $res = "No Success";
+        }
+
+        $con->commit();
+    } catch (\Throwable $th) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+// function to insert booking with custom rate into database
+function save_custom_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $rate, $total)
+{
+    global $con;
+    global $res;
+    $status = "upcoming";
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "INSERT INTO bookings (vehicle_id, customer_id, driver_id, account_id, start_date, end_date, start_time, end_time, custom_rate, total, status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        $stmt = $con->prepare($sql);
+        if ($stmt->execute([$v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $rate, $total, $status])) {
             $res = $con->lastInsertId();
         } else {
             $res = "No Success";

@@ -31,8 +31,7 @@
 <!-- overlayScrollbars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.10.0/browser/overlayscrollbars.browser.es6.min.js"></script>
 
-<!-- Intl Tel Js -->
-<script src="assets/build/js/intlTelInput.min.js"></script>
+
 
 <!-- DataTables  & Plugins -->
 <script src="assets/datatables/jquery.dataTables.min.js"></script>
@@ -78,8 +77,8 @@
 <?php if ($page == "Client Analytics"): ?>
     <!-- profitable client chart script -->
     <script>
-        const client_names =                                                         <?php echo json_encode($loaded_client_names); ?>;
-        const revenue =                                               <?php echo json_encode($loaded_clients); ?>;
+        const client_names =                                                                                     <?php echo json_encode($loaded_client_names); ?>;
+        const revenue =                                                                      <?php echo json_encode($loaded_clients); ?>;
         //setup block
         const data = {
             labels: client_names,
@@ -124,8 +123,8 @@
 <?php if ($page == "Analytics"): ?>
     <!-- 90 day income chart script -->
     <script>
-        const months =                                             <?php echo json_encode($months); ?>;
-        const money =                                           <?php echo json_encode($money); ?>;
+        const months =                                                                   <?php echo json_encode($months); ?>;
+        const money =                                                                <?php echo json_encode($money); ?>;
         //setup block
         const income_data = {
             labels: months,
@@ -166,8 +165,8 @@
         );
     </script>
     <script>
-        const vehicles =                                                 <?php echo json_encode($vehicles); ?>;
-        const popularity =                                                     <?php echo json_encode($popularity); ?>;
+        const vehicles =                                                                         <?php echo json_encode($vehicles); ?>;
+        const popularity =                                                                               <?php echo json_encode($popularity); ?>;
         //setup block
         const data = {
             labels: vehicles,

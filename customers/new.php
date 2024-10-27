@@ -1,26 +1,26 @@
 <?php
-// THIS FILE CONTAINS THE FORM FOR CREATING A NEW CUSTOMER
+    // THIS FILE CONTAINS THE FORM FOR CREATING A NEW CUSTOMER
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "New Client";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "New Client";
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=customers/all";
-$home_link_name = "All Clients";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=customers/all";
+    $home_link_name = "All Clients";
 
-$new_link = "index.php?page=customers/new";
-$new_link_name = "New Client";
+    $new_link      = "index.php?page=customers/new";
+    $new_link_name = "New Client";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Clients";
-$breadcrumb_active = "New Client";
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Clients";
+    $breadcrumb_active = "New Client";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
-$account_id = $_SESSION['account']['id'];
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+    $account_id = $_SESSION['account']['id'];
 ?>
 
 <section class="content">
@@ -110,7 +110,7 @@ $account_id = $_SESSION['account']['id'];
                             <div class="form-group">
                                 <label for="tel">Tel</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="tel" placeholder="Include country code" class="form-control form-control-border" >
+                                    <input type="tel" name="tel" id="phone" class="form-control form-control-border" >
                                     <?php if (isset($_GET['tel_err'])): ?>
                                         <p class="text-danger"><?php echo $_GET['tel_err']; ?></p>
                                     <?php endif;?>

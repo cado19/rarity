@@ -1,58 +1,60 @@
 <?php
-//page name. We set this inn the content start and also in the page title programatically
-$page = "agent";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "agent";
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=agents/all";
-$home_link_name = "All Agents";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=agents/all";
+    $home_link_name = "All Agents";
 
-$new_link = "index.php?page=agents/new";
-$new_link_name = "New agent";
+    $new_link      = "index.php?page=agents/new";
+    $new_link_name = "New agent";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Agents";
-$breadcrumb_active = "agent";
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Agents";
+    $breadcrumb_active = "agent";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
 
-	//fetch agent
-	$agent = get_agent($id);
-	// $no_of_vehicles = partner_vehicle_count($id);
-	$bookings = agent_bookings($id);
-	$no_of_bookings = agent_booking_count($id);
-	// $vehicles = partner_vehicles($id);
-}
-$log->info('Bookings:', $bookings);
+        //fetch agent
+        $agent = get_agent($id);
+        $rates = get_agent_rates($id);
+        // $no_of_vehicles = partner_vehicle_count($id);
+        $bookings       = agent_bookings($id);
+        $no_of_bookings = agent_booking_count($id);
+        // $vehicles = partner_vehicles($id);
+    }
+    $log->info('Bookings:', $bookings);
 
-// Program to display complete URL
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-	$link = "https";
-} else {
-	$link = "http";
-}
+    // Program to display complete URL
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $link = "https";
+    } else {
+        $link = "http";
+    }
 
-// Here append the common URL characters
-$link .= "://";
+    // Here append the common URL characters
+    $link .= "://";
 
-// Append the host(domain name,
-// ip) to the URL.
-$link .= $_SERVER['HTTP_HOST'];
+    // Append the host(domain name,
+    // ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
 
-// Append the requested resource
-// location to the URL
-$link .= $_SERVER['PHP_SELF'];
+    // Append the requested resource
+    // location to the URL
+    $link .= $_SERVER['PHP_SELF'];
 
-$link .= "?page=agents/show&id=${id}";
+    $link .= "?page=agents/show&id=${id}";
 ?>
 <script>
-	console.log(<?php echo json_encode($bookings); ?>);
+	console.log(<?php echo json_encode($rates); ?>);
 </script>
 <section class="content">
 	<div class="container-fluid">
+
 		<div class="row">
 			<div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
 				<div class="row d-flex justify-content-center">
@@ -98,6 +100,92 @@ $link .= "?page=agents/show&id=${id}";
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+				<div class="row d-flex justify-content-center">
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">SUV Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[0]['rate']); ?></span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Mid Size Suv Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[1]['rate']); ?></span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Medium Car Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[2]['rate']); ?></span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Small Car Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[3]['rate']); ?> </span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Safari Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[4]['rate']); ?> </span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Luxury</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[5]['rate']); ?> </span>
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Commercial</span>
+	                      <span class="info-box-number text-center text-muted mb-0"><?php echo number_format($rates[6]['rate']); ?> </span>
+	                    </div>
+	                  </div>
+	                </div>
+
+					<div class="col-12 col-sm-3">
+	                  <div class="info-box bg-light">
+	                    <div class="info-box-content">
+	                      <span class="info-box-text text-center text-muted">Edit Minimum Lease Rate</span>
+	                      <span class="info-box-number text-center text-muted mb-0">
+	                      	<a href="index.php?page=agents/edit_rate&id=<?php echo $id; ?>">Edit <i class="fa fa-arrow-right"></i></a>
+	                      </span>
+	                    </div>
+	                  </div>
+	                </div>
+
+
+
+				</div>
+
+			</div>
+		</div>
+
+
         <div class="row">
             <div class="card">
                 <div class="card-header">
@@ -122,22 +210,22 @@ $link .= "?page=agents/show&id=${id}";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php forEach ($bookings as $booking): ?>
+                                <?php foreach ($bookings as $booking): ?>
                                     <tr>
-                                        <td> <?php echo $booking['first_name']; ?> <?php echo $booking['last_name']; ?> </td>
-                                        <td> <?php echo $booking['model']; ?> <?php echo $booking['make']; ?> </td>
-                                        <td> <?php echo $booking['number_plate']; ?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo $booking['model']; ?><?php echo $booking['make']; ?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                         <?php echo $booking['number_plate']; ?> </td>
                                         <td>
                                             <?php
-$start = strtotime($booking['start_date']);
-echo date("l jS \of F Y", $start);
-?>
+                                                $start = strtotime($booking['start_date']);
+                                                echo date("l jS \of F Y", $start);
+                                            ?>
                                         </td>
                                         <td>
                                             <?php
-$end = strtotime($booking['end_date']);
-echo date("l jS \of F Y", $end);
-?>
+                                                $end = strtotime($booking['end_date']);
+                                                echo date("l jS \of F Y", $end);
+                                            ?>
                                         </td>
                                         <td> <a href="index.php?page=bookings/show&id=<?php echo $booking['id']; ?>">Details</a> </td>
                                     </tr>

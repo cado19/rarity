@@ -1,31 +1,31 @@
 <?php
-// THIS FILE IS THE FORM FOR CREATING A NEW BOOKING
+    // THIS FILE IS THE FORM FOR CREATING A NEW BOOKING
 
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-//page name. We set this inn the content start and also in the page title programatically
-$page = "New booking";
+    //page name. We set this inn the content start and also in the page title programatically
+    $page = "New booking";
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=bookings/all";
-$home_link_name = "All Bookings";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=bookings/all";
+    $home_link_name = "All Bookings";
 
-$new_link = "index.php?page=bookings/new";
-$new_link_name = "New Bookings";
+    $new_link      = "index.php?page=bookings/new";
+    $new_link_name = "New Booking";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Bookings";
-$breadcrumb_active = "All Bookings";
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Bookings";
+    $breadcrumb_active = "All Bookings";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
-$account_id = $_SESSION['account']['id'];
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
+    $account_id = $_SESSION['account']['id'];
 
-$vehicles = booking_vehicles();
-$customers = booking_customers();
-$drivers = booking_drivers();
-$log->info('customers', $customers);
+    $vehicles  = booking_vehicles();
+    $customers = booking_customers();
+    $drivers   = booking_drivers();
+    $log->info('customers', $customers);
 ?>
 
 <section class="content">
@@ -41,7 +41,7 @@ $log->info('customers', $customers);
                                 <label for="vehicle_id">Vehicle</label>
                                 <select name="vehicle_id"  class="form-control form-control-border">
                                     <?php foreach ($vehicles as $vehicle): ?>
-                                        <option value="<?php echo $vehicle['id']; ?>"> <?php echo $vehicle['model']; ?> <?php echo $vehicle['make']; ?> <?php echo $vehicle['number_plate']; ?>
+                                        <option value="<?php echo $vehicle['id']; ?>"><?php echo $vehicle['make']; ?><?php echo " "; ?><?php echo $vehicle['model']; ?><?php echo " "; ?><em><?php echo $vehicle['number_plate']; ?></em>
                                         </option>
                                     <?php endforeach;?>
                                 </select>
@@ -51,7 +51,7 @@ $log->info('customers', $customers);
                                 <label for="customer_id">Customer</label>
                                 <select name="customer_id" class="form-control form-control-border">
                                     <?php foreach ($customers as $customer): ?>
-                                        <option value="<?php echo $customer['id']; ?>"> <?php echo $customer['first_name']; ?> <?php echo $customer['last_name']; ?> </option>
+                                        <option value="<?php echo $customer['id']; ?>"><?php echo $customer['first_name']; ?><?php echo " "; ?><?php echo $customer['last_name']; ?> </option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -60,7 +60,7 @@ $log->info('customers', $customers);
                                 <label for="driver_id">Driver</label>
                                 <select name="driver_id" class="form-control form-control-border">
                                     <?php foreach ($drivers as $driver): ?>
-                                        <option value="<?php echo $driver['id']; ?>"> <?php echo $driver['first_name']; ?> <?php echo $driver['last_name']; ?> </option>
+                                        <option value="<?php echo $driver['id']; ?>"><?php echo $driver['first_name']; ?><?php echo " "; ?><?php echo $driver['last_name']; ?> </option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -75,7 +75,7 @@ $log->info('customers', $customers);
                                             </div>
                                         </div>
                                         <?php if (isset($_GET['start_date_err'])): ?>
-                                            <p class="text-danger"> <?php echo $_GET['start_date_err']; ?> </p>
+                                            <p class="text-danger"><?php echo $_GET['start_date_err']; ?> </p>
                                         <?php endif;?>
                                     </div>
 
@@ -90,7 +90,7 @@ $log->info('customers', $customers);
                                             </div>
                                         </div>
                                         <?php if (isset($_GET['end_date_err'])): ?>
-                                            <p class="text-danger"> <?php echo $_GET['end_date_err']; ?> </p>
+                                            <p class="text-danger"><?php echo $_GET['end_date_err']; ?> </p>
                                         <?php endif;?>
                                     </div>
 
@@ -110,7 +110,7 @@ $log->info('customers', $customers);
                                         </div>
                                     </div>
                                         <?php if (isset($_GET['start_time_err'])): ?>
-                                            <p class="text-danger"> <?php echo $_GET['start_time_err']; ?> </p>
+                                            <p class="text-danger"><?php echo $_GET['start_time_err']; ?> </p>
                                         <?php endif;?>
                                 </div>
                                 <div class="col-6">
@@ -123,13 +123,21 @@ $log->info('customers', $customers);
                                             </div>
                                         </div>
                                         <?php if (isset($_GET['end_time_err'])): ?>
-                                            <p class="text-danger"> <?php echo $_GET['end_time_err']; ?> </p>
+                                            <p class="text-danger"><?php echo $_GET['end_time_err']; ?> </p>
                                         <?php endif;?>
                                     </div>
 
                                 </div>
 
                             </div>
+
+                            <div class="form-group">
+                                <label for="driver_id">Custom Rate</label>
+                                <input type="text" name="custom_rate" class="form-control form-control-border">
+                            </div>
+                            <?php if (isset($_GET['rate_err'])): ?>
+                                <p class="text-danger"><?php echo $_GET['rate_err']; ?> </p>
+                            <?php endif;?>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-dark">Proceed to Contract</button>

@@ -42,6 +42,27 @@ function categories()
     return $res;
 }
 
+// function to get a vehicle's category id
+function category($vehicle_id)
+{
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "SELECT category_id FROM vehicle_basics WHERE id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$vehicle_id]);
+        $res = $stmt->fetch();
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
 // function to get deleted vehicles
 function deleted_vehicles()
 {

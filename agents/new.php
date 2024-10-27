@@ -1,29 +1,29 @@
 <?php
-// head to login screen if user is not signed in.
-include_once 'config/session_script.php';
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
 
-// head to home screen if user is not admin.
-include_once 'config/user_auth_script.php';
+    // head to home screen if user is not admin.
+    include_once 'config/user_auth_script.php';
 
-$page = "New Agent";
+    $page = "New Agent";
 
-// Navbar Links. We set these link in the navbar programatically.
-$home_link = "index.php?page=agents/all";
-$home_link_name = "All Agents";
+    // Navbar Links. We set these link in the navbar programatically.
+    $home_link      = "index.php?page=agents/all";
+    $home_link_name = "All Agents";
 
-$new_link = "index.php?page=agents/new";
-$new_link_name = "New Agent";
+    $new_link      = "index.php?page=agents/new";
+    $new_link_name = "New Agent";
 
-// Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-$breadcrumb = "Agents";
-$breadcrumb_active = "New Agent";
+    // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
+    $breadcrumb        = "Agents";
+    $breadcrumb_active = "New Agent";
 
-include_once 'partials/header.php';
-include_once 'partials/content_start.php';
+    include_once 'partials/header.php';
+    include_once 'partials/content_start.php';
 
-$countries = countries();
+    $countries = countries();
 
-$account_id = $_SESSION['account']['id'];
+    $account_id = $_SESSION['account']['id'];
 ?>
 
 <main>
@@ -57,7 +57,7 @@ $account_id = $_SESSION['account']['id'];
                                     <select name="country" class="form-control form-control-border">
 
                                             <option value="">--Please choose an option--</option>
-                                            <?php forEach ($countries as $country): ?>
+                                            <?php foreach ($countries as $country): ?>
                                                 <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
                                             <?php endforeach;?>
 
@@ -67,7 +67,7 @@ $account_id = $_SESSION['account']['id'];
 
                                 <div class="form-group">
                                     <label for="tel">Tel</label>
-                                    <input type="tel" name="tel" class="form-control form-control-border">
+                                    <input type="tel" name="tel" id="phone" class="form-control form-control-border">
                                 </div>
 
 
