@@ -6,8 +6,10 @@
         <div class="wrapper fadeInDown">
           <div id="formContent">
             <!-- Tabs Titles -->
-            <h4>We are <span>Rarity Rental</span></h4>
-            <p>Edit Your Password</p>
+            <div class="titles mt-3">
+              <h4>We are <span>Rarity Cars</span></h4>
+              <p>Edit Your Password</p>
+            </div>
 
             <!-- Icon -->
             <div class="fadeIn first">
@@ -17,7 +19,7 @@
 
             <!-- Login Form -->
             <form action="index.php?page=accounts/update" method="POST" class="log-in" autocomplete="off">
-              <input type="text" id="login" class="fadeIn second" name="email" placeholder="login" required>
+              <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email" required>
               <input type="text" id="password" class="fadeIn third" name="password" placeholder="password" required>
               <input type="submit" class="fadeIn fourth" value="Submit">
             </form>

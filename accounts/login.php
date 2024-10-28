@@ -1,10 +1,10 @@
 <?php
-$page = "Login";
-include_once 'partials/account-header.php';
-// $log->info('session', $_SESSION['logged_in']);
-if (isset($_SESSION['account'])) {
-	$log->info('account', $_SESSION['account']);
-}
+    $page = "Login";
+    include_once 'partials/account-header.php';
+    // $log->info('session', $_SESSION['logged_in']);
+    if (isset($_SESSION['account'])) {
+        $log->info('account', $_SESSION['account']);
+    }
 ?>
 
 
@@ -31,7 +31,7 @@ if (isset($_SESSION['account'])) {
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-              <a class="underlineHover" href="index.php?page=accounts/edit">Forgot Password?</a>
+              <a class="underlineHover" href="index.php?page=accounts/edit">Edit Password?</a>
             </div>
 
           </div>
