@@ -103,6 +103,26 @@ function fetch_account($email)
     return $res;
 }
 
+// get role id from account id
+function get_role_id($account_id)
+{
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+        $sql  = "SELECT role_id FROM accounts WHERE id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$account_id]);
+        $res = $stmt->fetch();
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
 function login()
 {
 

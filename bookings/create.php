@@ -46,11 +46,13 @@
             // get category_id using vehicle_id
             $category    = category($v_id);
             $category_id = $category['category_id'];
+            $role        = get_role_id($a_id);
+            $role_id     = $role['role_id'];
 
             //get rate using agent id and category id
             $rate_response = get_agent_rate($a_id, $category_id);
             $rate          = $rate_response['rate'];
-            if ($rate == 0) {
+            if ($rate == 0 && $role_id == 2) {
                 $rate_err = "You cannot set custom rate for this category. Contact Admin";
                 header("Location: index.php?page=bookings/new&rate_err=$rate_err");
                 exit;
