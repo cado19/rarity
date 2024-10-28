@@ -1,12 +1,12 @@
 <?php
-$page = "Edit Password";
-include_once 'partials/account-header.php';
+    $page = "Edit Password";
+    include_once 'partials/account-header.php';
 ?>
 
         <div class="wrapper fadeInDown">
           <div id="formContent">
             <!-- Tabs Titles -->
-            <h4>We are <span>Kisuzi Rental</span></h4>
+            <h4>We are <span>Rarity Rental</span></h4>
             <p>Edit Your Password</p>
 
             <!-- Icon -->

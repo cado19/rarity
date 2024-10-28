@@ -81,7 +81,7 @@
                     //REDIRECT TO THE CONTRACT PAGE SO THAT A SIGNATURE CAN BE UPLOADED IF IT IS AVAILABLE
                     $msg = "Booking created";
 
-                    header("Location: index.php?page=contracts/edit&id=$result&msg=$msg");
+                    header("Location: index.php?page=bookings/show&id=$result&msg=$msg");
                 }
 
             }
