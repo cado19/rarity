@@ -29,7 +29,12 @@
             <p><b>Client:</b><?php echo " "; ?><?php show_value($voucher, 'first_name');?><?php echo " "; ?><?php show_value($voucher, 'last_name');?></p>
             <p><b>Vehicle:</b><?php echo " "; ?><?php show_value($voucher, 'make');?><?php echo " "; ?><?php show_value($voucher, 'model');?> </p>
             <p><b>Registration:</b><?php echo " "; ?><?php show_value($voucher, 'number_plate');?></p>
-            <p><b>Total:</b><?php echo " "; ?><?php show_numeric_value($voucher, 'total');?> </p>
+            <?php if ($voucher['custom_rate'] == 0): ?>
+                <p><b>Daily Rate:</b><?php echo " "; ?><?php show_value($voucher, 'daily_rate');?>/-</p>
+            <?php else: ?>
+                <p><b>Daily Rate:</b><?php echo " "; ?><del><?php show_value($voucher, 'daily_rate');?>/-</del> <ins><?php show_value($voucher, 'custom_rate');?>/-</ins></p>
+            <?php endif;?>
+            <p><b>Total:</b><?php echo " "; ?><?php show_numeric_value($voucher, 'total');?>/- </p>
             <p><b>Start Date:</b><?php echo " "; ?><?php echo date("l jS \of F Y", $start_date); ?></p>
             <p><b>End Date:</b><?php echo " "; ?><?php echo date("l jS \of F Y", $end_date); ?> </p>
             <p><b>Start Time:</b><?php echo " "; ?><?php show_value($voucher, 'start_time');?></p>
