@@ -78,7 +78,7 @@
                                     <div class="info-box-content">
                                       <span class="info-box-text text-center text-muted">Client</span>
                                       <span class="info-box-number text-center text-muted mb-0">
-                                        <?php echo $booking['first_name']; ?><?php echo " "; ?><?php echo $booking['last_name']; ?>
+                                        <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>
                                       </span>
                                     </div>
                                   </div>
@@ -106,7 +106,7 @@
                                   <div class="info-box bg-light">
                                     <div class="info-box-content">
                                       <span class="info-box-text text-center text-muted">Duration</span>
-                                      <span class="info-box-number text-center text-muted mb-0"><?php echo $duration; ?> days</span>
+                                      <span class="info-box-number text-center text-muted mb-0"><?php echo (int) $duration; ?> days</span>
                                     </div>
                                   </div>
                                 </div>
@@ -173,8 +173,37 @@
                                     </div>
 
                                     <div class="row">
+                                      <!-- A box with a form to stop booking early in one column -->
+                                      <div class="col-4 col-sm-4">
+                                          <?php if ($booking['status'] != "cancelled"): ?>
+                                            <div class="info-box bg-light">
+                                              <div class="info-box-content">
+                                                <form action="index.php?page=bookings/cancel" method="POST">
+                                                  <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                                  <button type="submit" class="btn btn-outline-danger text-sm"> Cancel Booking </button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          <?php endif;?>
+                                      </div>
+
+                                      <!-- A box with a link to edit booking -->
+                                      <div class="col-4 col-sm-4">
+                                          <?php if ($booking['status'] != "cancelled"): ?>
+                                            <div class="info-box bg-light">
+                                              <div class="info-box-content">
+                                                <a href="index.php?page=bookings/edit&id=<?php echo $id; ?>" class="btn btn-outline-danger">Edit Booking</a>
+                                              </div>
+                                            </div>
+                                          <?php endif;?>
+                                      </div>
+
+
+
+
                                       <!-- A box with a form to extend booking in one column -->
-                                      <div class="col-12 col-sm-4">
+
+                                      <div class="col-4 col-sm-4">
                                         <?php if ($booking['status'] == "active"): ?>
                                           <div class="info-box bg-light">
                                             <div class="info-box-content">
@@ -204,19 +233,7 @@
                                         <?php endif;?>
                                       </div>
 
-                                      <!-- A box with a form to stop booking early in one column -->
-                                      <div class="col-12 col-sm-4">
-                                        <?php if ($booking['status'] != "cancelled"): ?>
-                                          <div class="info-box bg-light">
-                                            <div class="info-box-content">
-                                              <form action="index.php?page=bookings/cancel" method="POST">
-                                                <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                <button type="submit" class="btn btn-outline-danger text-sm"> Cancel Booking </button>
-                                              </form>
-                                            </div>
-                                          </div>
-                                        <?php endif;?>
-                                      </div>
+
 
                                     </div>
 
@@ -227,14 +244,14 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                           <h3 class="text-primary"><i class="fa fa-file-text"></i> Contract & vouchers</h3>
-                          <p class="text-muted">This is the contract between The renter and                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
+                          <p class="text-muted">This is the contract between The renter and                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
                           <br>
                           <div class="text-muted">
                             <p class="text-sm">Company Name
                               <b class="d-block">Rarity Cars</b>
                             </p>
                             <p class="text-sm">Client
-                              <b class="d-block"><?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?></b>
+                              <b class="d-block"><?php echo $booking['customer_first_name']; ?><?php echo $booking['customer_last_name']; ?></b>
                             </p>
                           </div>
 
