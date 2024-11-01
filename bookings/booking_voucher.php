@@ -17,13 +17,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <img src="assets/rarity_contract_top.png" alt="">
+        <div class="col-12 col-xs-12">
+            <img src="assets/rarity_contract_top.png" alt="" class="img-fluid">
         </div>
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-9 col-6">
             <h2 class="text-center">Booking Voucher</h2>
             <p><b>Booking No:</b><?php echo " "; ?><?php show_value($voucher, 'booking_no');?></p>
             <p><b>Client:</b><?php echo " "; ?><?php show_value($voucher, 'first_name');?><?php echo " "; ?><?php show_value($voucher, 'last_name');?></p>
