@@ -143,9 +143,9 @@
                                     <tbody>
                                         <?php foreach ($bookings as $booking): ?>
                                             <tr>
-                                                <td>                                                                                                                                                             <?php echo $booking['first_name']; ?><?php echo $booking['last_name']; ?> </td>
-                                                <td>                                                                                                                                                             <?php echo $booking['model']; ?><?php echo $booking['make']; ?> </td>
-                                                <td>                                                                                                                                                             <?php echo $booking['number_plate']; ?> </td>
+                                                <td>                                                                                                                                                                                                                 <?php echo $booking['first_name']; ?><?php echo " "; ?><?php echo $booking['last_name']; ?> </td>
+                                                <td>                                                                                                                                                                                                                 <?php echo $booking['model']; ?><?php echo " "; ?><?php echo $booking['make']; ?> </td>
+                                                <td>                                                                                                                                                                                                                 <?php echo $booking['number_plate']; ?> </td>
                                                 <td>
                                                     <?php
                                                         $start = strtotime($booking['start_date']);

@@ -140,7 +140,7 @@
                             <?php endif;?>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-outline-dark">Proceed to Contract</button>
+                                <button type="submit" class="btn btn-outline-dark">Save Booking</button>
                             </div>
                         </form>
 
