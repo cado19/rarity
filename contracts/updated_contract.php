@@ -22,9 +22,9 @@
 			<table class="table table-bordered">
 				<tbody>
 					<tr><td><b>HIRER FULL NAME</b></td></tr>
-					<tr><td><b>					            <?php show_value($contract, 'c_fname');?><?php show_value($contract, 'c_lname');?></b></td></tr>
-					<tr><td>DRIVER:					                <?php show_value($contract, 'first_name');?><?php show_value($contract, 'last_name');?></td></tr>
-					<tr><td>HIRER PHYSICAL ADDRESS:					                                <?php show_value($contract, 'residential_address');?></td></tr>
+					<tr><td><b><?php show_value($contract, 'c_fname');?><?php echo " "; ?><?php show_value($contract, 'c_lname');?></b></td></tr>
+					<tr><td>DRIVER:<?php echo " "; ?><?php show_value($contract, 'first_name');?><?php echo " "; ?><?php show_value($contract, 'last_name');?></td></tr>
+					<tr><td>HIRER PHYSICAL ADDRESS:<?php echo " "; ?><?php show_value($contract, 'residential_address');?></td></tr>
 					<tr><td>REFEREE NAME</td></tr>
 					<tr><td>REFEREE ID NO</td><td>SIGN</td><td>TEL NO</td></tr>
 					<tr><td></td></tr>
@@ -38,8 +38,8 @@
 					<tr><td><b>SHS PER DAY</b></td><td><b>CAR MAKE</b></td><td><b>CAR MODEL</b></td></tr>
 					<tr><td><?php show_numeric_value($contract, 'daily_rate');?></td><td><?php show_value($contract, 'make');?></td><td><?php show_value($contract, 'model');?></td></tr>
 					<tr><td><b>CAR  CHECKED IN AT</b></td></tr>
-					<tr><td><b>DATE IN</b>					                       <?php show_value($contract, 'end_date');?></td><td><b>TIME IN</b><?php show_value($contract, 'end_time');?></td></tr>
-					<tr><td><b>DATE OUT</b>					                        <?php show_value($contract, 'start_date');?></td><td><b>TIME OUT</b><?php show_value($contract, 'start_time');?></td></tr>
+					<tr><td><b>DATE IN</b><?php echo " "; ?><?php show_value($contract, 'end_date');?></td><td><b>TIME IN</b><?php echo " "; ?><?php show_value($contract, 'end_time');?></td></tr>
+					<tr><td><b>DATE OUT</b><?php echo " "; ?><?php show_value($contract, 'start_date');?></td><td><b>TIME OUT</b><?php echo " "; ?><?php show_value($contract, 'start_time');?></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -50,7 +50,7 @@
 				<td><b>D.L NO.</b></td>
 				<td></td>
 				<td><b>KMS IN</b></td>
-				<td><b>COST X DAYS=				                    <?php show_numeric_value($contract, 'total');?></b></td>
+				<td><b>COST X DAYS=				                   				                   				                   				                   	<?php echo " "; ?><?php show_numeric_value($contract, 'total');?></b></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -93,7 +93,7 @@
  existing policy/of insurance quoted above.</p>
 			<div class="row">
 				<div class="col-6">
-					DATE:					      <?php show_value($contract, 'start_date');?>
+					DATE:<?php show_value($contract, 'start_date');?>
 				</div>
 				<div class="col-6">
 					SIGNATURE: <img src="contracts/signatures/<?php echo $contract['signature']; ?>" alt="Signature" class="signature-img">
@@ -195,7 +195,7 @@ guarantee shall be given.</P>
 			<p>Hirer's Signature: <img src="contracts/signatures/<?php echo $contract['signature']; ?>" alt="Signature" class="signature-img"></p>
 		</div>
 		<div class="col-6">
-			<p>Date:			         <?php show_value($contract, 'start_date');?></p>
+			<p>Date:<?php show_value($contract, 'start_date');?></p>
 		</div>
 	</div>
 </div>

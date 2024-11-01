@@ -3,14 +3,15 @@ function all_agents()
 {
     global $con;
     global $res;
-    $id = 2;
+    $agent_id       = 2;
+    $super_agent_id = 1;
 
     try {
         $con->beginTransaction();
 
-        $sql  = "SELECT * FROM accounts WHERE role_id = ?";
+        $sql  = "SELECT * FROM accounts WHERE role_id = ? || role_id = ?";
         $stmt = $con->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt->execute([$agent_id, $super_agent_id]);
         $res = $stmt->fetchAll();
 
         $con->commit();
