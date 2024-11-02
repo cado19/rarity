@@ -13,12 +13,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<img src="assets/rarity_contract_top.png" alt="">
+			<img src="assets/rarity_contract_top.png" alt="" class="img-fluid">
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-md-6 col-sm-12 col-xs-12">
 			<table class="table table-bordered">
 				<tbody>
 					<tr><td><b>HIRER FULL NAME</b></td></tr>
@@ -31,8 +31,8 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-6">
-			<table class="table table-bordered">
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			<table class="table table-bordered table-reponsive">
 				<tbody>
 					<tr><td><b>CASH</b></td><td><b>CHEQUE</b></td></tr>
 					<tr><td><b>SHS PER DAY</b></td><td><b>CAR MAKE</b></td><td><b>CAR MODEL</b></td></tr>
@@ -45,12 +45,13 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-sm-12 col-xs-12">
 		<table class="table table-bordered">
 			<tr>
 				<td><b>D.L NO.</b></td>
 				<td></td>
 				<td><b>KMS IN</b></td>
-				<td><b>COST X DAYS=				                   				                   				                   				                   	<?php echo " "; ?><?php show_numeric_value($contract, 'total');?></b></td>
+				<td><b>COST X DAYS=<?php echo " "; ?><?php show_numeric_value($contract, 'total');?></b></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -61,6 +62,7 @@
 				<td></td>
 			</tr>
 		</table>
+		</div>
 	</div>
 	<div class="row">
 		<table class="table table-bordered">
