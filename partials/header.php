@@ -52,19 +52,12 @@
       <!-- OUR CSS  -->
       <link rel="stylesheet" href="assets/style.css">
 
-
-
-
       <script type="text/javascript" src="assets/signature.js"></script>
 
-
-
-
-    <title>Rental |                                                          <?php echo $page; ?></title>
+    <title>Rarity Cars |  <?php echo $page; ?></title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <style>
       #note{position:absolute;left:50px;top:35px;padding:0px;margin:0px;cursor:default;}
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-

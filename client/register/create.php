@@ -99,7 +99,7 @@
             header("Location: index.php?page=client/register/success&msg=$msg");
         } else {
             $err_msg = "An error occured";
-            header("Location: index.php?page=client/register/new&err_msg=$msg");
+            header("Location: index.php?page=client/register/new&err_msg=$err_msg");
         }
         // $log->info($result);
     } else {

@@ -30,6 +30,31 @@
         $log->info('Foo: ', $customer);
     }
 
+    // get customer edit url
+    // Program to display complete URL
+    // if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    //     $link = "https";
+    // } else {
+    //     $link = "http";
+    // }
+
+    // // Here append the common URL characters
+    // $link .= "://";
+
+    // // Append the host(domain name,
+    // // ip) to the URL.
+    // $link .= $_SERVER['HTTP_HOST'];
+
+    // // Append the requested resource
+    // // location to the URL
+    // $link .= $_SERVER['PHP_SELF'];
+
+    // $link .= "?page=client/register/edit&id=${id}";
+
+    $customer_edit_link        = customer_edit_link($id);
+    $customer_profile_pic_link = customer_profile_pic_link($id);
+    $customer_id_link          = customer_id_link($id);
+
 ?>
 
 <section class="content">
@@ -68,10 +93,18 @@
                       </li>
                     </ul>
 
-                    <a href="index.php?page=customers/profile_form&id=<?php echo $id; ?>" class="btn btn-primary btn-block"><b>Edit Profile Picture</b></a>
-                    <a href="index.php?page=customers/edit&id=<?php echo $id; ?>" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
-                    <a href="index.php?page=customers/delete&id=<?php echo $id; ?>" class="btn btn-danger btn-block">Delete Client</a>
-                    <a href="index.php?page=customers/blacklist_form&id=<?php echo $id; ?>" class="btn btn-warning btn-block">Blacklist Client</a>
+                    <!-- Edit Profile  -->
+                    <p id="customer-link" class="d-none"><?php echo $customer_edit_link; ?></p>
+                    <button onclick="copyToClipboard('#customer-link')" class="btn btn-sm btn-success btn-block">Copy Profile Link</button>
+                    <a href="index.php?page=customers/edit&id=<?php echo $id; ?>" class="btn btn-sm btn-primary btn-block"><b>Edit Profile</b></a>
+
+                    <!-- Edit Profile Picture -->
+                    <p id="profile-pic-link" class="d-none"><?php echo $customer_profile_pic_link; ?></p>
+                    <button onclick="copyToClipboard('#profile-pic-link')" class="btn btn-sm btn-success btn-block mt-2">Copy Profile Picture Link</button>
+                    <a href="index.php?page=customers/profile_form&id=<?php echo $id; ?>" class="btn btn-sm btn-primary btn-block"><b>Edit Profile Picture</b></a>
+
+                    <a href="index.php?page=customers/delete&id=<?php echo $id; ?>" class="btn btn-sm btn-danger btn-block">Delete Client</a>
+                    <a href="index.php?page=customers/blacklist_form&id=<?php echo $id; ?>" class="btn btn-sm btn-warning btn-block">Blacklist Client</a>
                   </div>
                   <!-- /.card-body -->
                 </div>
@@ -83,16 +116,51 @@
                     <!-- show id images through a carousel -->
                     <div class="col-6">
                         <div class="card mb-3">
-                            <?php if (isset($customer['id_image'])): ?>
-                                <img src="customers/id/<?php echo $customer['id_image']; ?>" class="card-img-top display-img" alt="Client ID Image">
-                            <?php else: ?>
-                                <img src="images/male-laughter-avatar.jpg" class="card-img-top" alt="Client ID Image">
-                            <?php endif;?>
+                          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                              <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                              <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                              <!-- <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
+                            </ol>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <?php if (isset($customer['id_image'])): ?>
+                                    <img src="customers/id/<?php echo $customer['id_image']; ?>" class="card-img-top display-img d-block" alt="Client Front ID Image">
+                                <?php else: ?>
+                                    <img src="images/male-laughter-avatar.jpg" class="card-img-top" alt="Client ID Image">
+                                <?php endif;?>
+                                <div class="carousel-caption d-none d-md-block">
+                                  <h5>Front ID Image</h5>
+                                </div>
+                              </div>
+                              <div class="carousel-item">
+                                <?php if (isset($customer['id_back_image'])): ?>
+                                    <img src="customers/id/<?php echo $customer['id_back_image']; ?>" class="card-img-top display-img d-block" alt="Client Back ID Image">
+                                <?php else: ?>
+                                    <img src="images/male-laughter-avatar.jpg" class="card-img-top" alt="Client ID Image">
+                                <?php endif;?>
+                                <div class="carousel-caption d-none d-md-block">
+                                  <h5>Back ID Image</h5>
+                                </div>
+                              </div>
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div>
 
                           <div class="card-body">
                             <h5 class="card-title">Identification</h5>
                             <p class="card-text">This is the customer's identification card.</p>
                             <a href="index.php?page=customers/id_form&id=<?php echo $id; ?>" class="btn btn-primary">Upload ID Card</a>
+                            <p id="id-pic-link" class="d-none"><?php echo $customer_id_link; ?></p>
+                            <button onclick="copyToClipboard('#id-pic-link')" class="btn btn-success">Copy ID Upload Link</button>
                           </div>
                         </div>
                     </div>
@@ -142,9 +210,9 @@
                             <tbody>
                                 <?php foreach ($bookings as $booking): ?>
                                     <tr>
-                                        <td>                                                                                         <?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
-                                        <td>                                                                                         <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
-                                        <td>                                                                                         <?php show_value($booking, 'number_plate');?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
+                                        <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <?php show_value($booking, 'number_plate');?> </td>
                                         <td>
                                             <?php
                                                 $start = strtotime($booking['start_date']);

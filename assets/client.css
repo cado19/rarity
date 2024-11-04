@@ -3,6 +3,11 @@ body{
 /*  background:#eee;*/
 }
 
+#my-camera{
+  height: 240px;
+  width: 240px;
+}
+
 /* E-commerce */
 .product-box {
   padding: 0;
@@ -154,4 +159,9 @@ table.shoping-cart-table tr td:last-child {
 }
 .rounded-circle {
     border-radius: 50% !important;
+}
+
+.client-img{
+  height: 100px;
+  width: 100px;
 }

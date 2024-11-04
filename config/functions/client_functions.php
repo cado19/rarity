@@ -268,19 +268,20 @@ function update_customer($first_name, $last_name, $email, $id_type, $id_number, 
 }
 
 // function to update clients from the client's dashboard
-function update_client($first_name, $last_name, $id_type, $id_number, $tel, $residential_address, $work_address, $date_of_birth, $id)
+function update_client($id_type, $id_number, $tel, $residential_address, $work_address, $date_of_birth, $dl_number, $dl_expiry, $id)
 {
     global $con;
     global $res;
     try {
         $con->beginTransaction();
-        $sql  = "UPDATE customer_details SET first_name = ?, last_name = ?, id_type = ?, id_no = ?, dl_no = ?, dl_expiration = ?, phone_no = ?, residential_address = ?, work_address = ?, date_of_birth = ? WHERE id = ?";
+        $sql  = "UPDATE customer_details SET id_type = ?, id_no = ?, dl_no = ?, dl_expiration = ?, phone_no = ?, residential_address = ?, work_address = ?, date_of_birth = ? WHERE id = ?";
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$first_name, $last_name, $id_type, $id_number, $dl_number, $dl_expiry, $tel, $residential_address, $work_address, $date_of_birth, $id])) {
+        if ($stmt->execute([$id_type, $id_number, $dl_number, $dl_expiry, $tel, $residential_address, $work_address, $date_of_birth, $id])) {
             $res = "Success";
         } else {
             $res = "Unsuccessful";
         }
+        $con->commit();
     } catch (Exception $e) {
         $con->rollback();
     }

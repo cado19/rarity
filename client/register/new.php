@@ -188,7 +188,7 @@
 		  <div class="form-group">
             <label class="col-sm-2 control-label">Residential address</label>
             <div class="col-sm-10">
-            	<input type="text" name="residential_address" class="form-control >
+            	<input type="text" name="residential_address" class="form-control" >
             </div>
           </div>
 
