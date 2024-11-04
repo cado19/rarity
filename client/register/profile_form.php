@@ -69,4 +69,4 @@
 </div>
 </div>
 
-<?php include_once 'partials/client-footer.php';?>
+<?php include_once 'partials/client-webcam-footer.php';?>
