@@ -210,7 +210,7 @@
                             <tbody>
                                 <?php foreach ($bookings as $booking): ?>
                                     <tr>
-                                        <td>                                             <?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
+                                        <td><?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
                                         <td>                                             <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
                                         <td>                                             <?php show_value($booking, 'number_plate');?> </td>
                                         <td>

@@ -114,46 +114,13 @@
             <label class="col-sm-2 control-label">DL Expiry</label>
             <div class="col-sm-10">
             	<div class="input-group date" id="dl_expiry" data-target-input="nearest">
-                    <input type="text" name="dl_expiry" class="form-control datetimepicker-input" data-target="#dl_expiry"/>
-                    <div class="input-group-append" data-target="#dl_expiry" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+                  <input type="text" name="dl_expiry" class="form-control datetimepicker-input" data-target="#dl_expiry"/>
+                  <div class="input-group-append" data-target="#dl_expiry" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
             </div>
           </div>
-
-          <!-- DL Number  -->
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Profile Image</label>
-            <div class="col-sm-10">
-              <input type="file" name="profile_image" class="form-control-file">
-            </div>
-                    <?php if (isset($_GET['profile_image_err'])): ?>
-                        <p class="text-danger"><?php echo $_GET['profile_image_err']; ?></p>
-                    <?php endif;?>
-          </div>
-          <!-- DL Number  -->
-          <div class="form-group">
-            <label class="col-sm-2 control-label">ID Image</label>
-            <div class="col-sm-10">
-              <input type="file" name="id_image" class="form-control-file">
-            </div>
-                    <?php if (isset($_GET['id_image_err'])): ?>
-                        <p class="text-danger"><?php echo $_GET['id_image_err']; ?></p>
-                    <?php endif;?>
-          </div>
-          <!-- DL Number  -->
-          <div class="form-group">
-            <label class="col-sm-2 control-label">DL Image</label>
-            <div class="col-sm-10">
-              <input type="file" name="dl_image" class="form-control-file">
-            </div>
-                    <?php if (isset($_GET['dl_image_err'])): ?>
-                        <p class="text-danger"><?php echo $_GET['dl_image_err']; ?></p>
-                    <?php endif;?>
-          </div>
-
-
 
         </div>
 
@@ -185,7 +152,7 @@
             </div>
           </div>
 
-		  <div class="form-group">
+    		  <div class="form-group">
             <label class="col-sm-2 control-label">Residential address</label>
             <div class="col-sm-10">
             	<input type="text" name="residential_address" class="form-control" >
