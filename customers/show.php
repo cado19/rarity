@@ -178,6 +178,8 @@
                                 <h5 class="card-title">License</h5>
                                 <p class="card-text">This is the customer's license.</p>
                                 <a href="index.php?page=customers/license_form&id=<?php echo $id; ?>" class="btn btn-primary">Upload customer's License</a>
+                                <p id="license-pic-link" class="d-none"><?php echo $customer_id_link; ?></p>
+                                <button onclick="copyToClipboard('#license-pic-link')" class="btn btn-success">Copy License Upload Link</button>
                             </div>
                         </div>
                     </div>
@@ -211,8 +213,8 @@
                                 <?php foreach ($bookings as $booking): ?>
                                     <tr>
                                         <td><?php show_value($booking, 'first_name');?><?php show_value($booking, 'last_name');?> </td>
-                                        <td>                                             <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
-                                        <td>                                             <?php show_value($booking, 'number_plate');?> </td>
+                                        <td> <?php show_value($booking, 'make');?><?php echo " "; ?><?php show_value($booking, 'model');?> </td>
+                                        <td>  <?php show_value($booking, 'number_plate');?> </td>
                                         <td>
                                             <?php
                                                 $start = strtotime($booking['start_date']);

@@ -110,6 +110,7 @@ function category_name($category_id)
     return $res;
 }
 
+// generate link where customer can edit their profile
 function customer_edit_link($id)
 {
     // Program to display complete URL
@@ -135,6 +136,7 @@ function customer_edit_link($id)
     return $link;
 }
 
+// generate link where customer can edit their profile
 function customer_profile_pic_link($id)
 {
     // Program to display complete URL
@@ -159,7 +161,7 @@ function customer_profile_pic_link($id)
 
     return $link;
 }
-
+// generate link where customer can upload their id image
 function customer_id_link($id)
 {
     // Program to display complete URL
@@ -185,6 +187,7 @@ function customer_id_link($id)
     return $link;
 }
 
+// generate link where customer can upload their license image
 function customer_license_link($id)
 {
     // Program to display complete URL
