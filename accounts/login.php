@@ -36,3 +36,4 @@
 
           </div>
         </div>
+        <?php include_once 'partials/other_footer.php';?>

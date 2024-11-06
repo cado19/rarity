@@ -83,3 +83,11 @@ ADD COLUMN `country` VARCHAR(100) NULL AFTER `representative`;
 -- assignment id to bookings. person who assigns the car
 ALTER TABLE `kisuzi-rental`.`bookings` 
 ADD COLUMN `assign_id` INT NULL AFTER `account_id`;
+
+-- CHANGE category to category_id in vehicle basics
+ALTER TABLE `rarity-rental`.`vehicle_basics` 
+CHANGE COLUMN `category` `category_id` VARCHAR(15) NULL DEFAULT NULL ;
+
+-- ADD BOOKING NUMBER TO BOOKINGS
+ALTER TABLE `rarity-rental`.`bookings` 
+ADD COLUMN `booking_no` VARCHAR(150) NULL AFTER `id`;

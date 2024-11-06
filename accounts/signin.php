@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		exit;
 	} else {
 		$msg = "Incorrect email/password combination";
-		header("Location: index.php?page=accounts/login&msg=$msg");
+		header("Location: index.php?page=accounts/login&err_msg=$msg");
 		exit;
 	}
 
