@@ -28,6 +28,7 @@
     $active_bookings = home_active_bookings();
     $partner_count   = partner_count();
     $bookings        = home_bookings();
+    $booked_vehicles = booked_vehicles_home();
 
     $log->info('bookings', $bookings);
 ?>
@@ -117,7 +118,7 @@
              </div>
 
 
-             <div class="row">
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -143,9 +144,9 @@
                                     <tbody>
                                         <?php foreach ($bookings as $booking): ?>
                                             <tr>
-                                                <td>                                                                                                                                                                                                                 <?php echo $booking['first_name']; ?><?php echo " "; ?><?php echo $booking['last_name']; ?> </td>
-                                                <td>                                                                                                                                                                                                                 <?php echo $booking['model']; ?><?php echo " "; ?><?php echo $booking['make']; ?> </td>
-                                                <td>                                                                                                                                                                                                                 <?php echo $booking['number_plate']; ?> </td>
+                                                <td><?php echo $booking['first_name']; ?><?php echo " "; ?><?php echo $booking['last_name']; ?> </td>
+                                                <td><?php echo $booking['model']; ?><?php echo " "; ?><?php echo $booking['make']; ?> </td>
+                                                <td> <?php echo $booking['number_plate']; ?> </td>
                                                 <td>
                                                     <?php
                                                         $start = strtotime($booking['start_date']);
@@ -170,7 +171,59 @@
                 </div>
             </div>
                  <!-- End of Recent Orders  -->
-             </div>
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+
+                    <!-- Vehicles on active bookings Table  -->
+                             <div class="duty-vehicles">
+                                <h2>Vehicles on active bookings</h2>
+                                <?php if (empty($bookings)): ?>
+                                    <h4>You currently have no booked vehicles yet</h4>
+                                <?php else: ?>
+                                <table id="example1" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking Number</th>
+                                            <th>Make</th>
+                                            <th>Model</th>
+                                            <th>Registration</th>
+                                            <th>Booking End</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($booked_vehicles as $b_vehicle): ?>
+                                            <tr>
+                                                <td><?php echo $b_vehicle['booking_no']; ?> </td>
+                                                <td><?php echo $b_vehicle['make']; ?> </td>
+                                                <td><?php echo $b_vehicle['model']; ?></td>
+                                                <td> <?php echo $b_vehicle['number_plate']; ?> </td>
+                                                <td>
+                                                    <?php
+                                                        $end = strtotime($b_vehicle['end_date']);
+                                                        echo date("l jS \of F Y", $end);
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                                <?php endif;?>
+                                <a href="index.php?page=bookings/active_vehicle">Show All</a>
+
+                         </div>
+                     </div>
+                </div>
+            </div>
+                 <!-- End of Recent Orders  -->
+
+                 
+         </div>
 
         </div>
     </section>

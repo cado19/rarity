@@ -536,3 +536,45 @@ function booking_voucher_details($id)
 
     return $res;
 }
+
+function booked_vehicles()
+{
+    global $con;
+    global $res;
+    $status = "active";
+
+    try {
+        $con->beginTransaction();
+        $sql  = "SELECT v.make, v.model, v.number_plate, b.booking_no, b.end_date FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE b.status = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$status]);
+        $res = $stmt->fetchAll();
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+function booked_vehicles_home()
+{
+    global $con;
+    global $res;
+    $status = "active";
+
+    try {
+        $con->beginTransaction();
+        $sql  = "SELECT v.make, v.model, v.number_plate, b.booking_no, b.end_date FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE b.status = ? LIMIT 5";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$status]);
+        $res = $stmt->fetchAll();
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+
