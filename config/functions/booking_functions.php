@@ -75,7 +75,7 @@ function completed_bookings()
 {
     global $con;
     global $res;
-    $status = "completed";
+    $status = "complete";
 
     try {
 
@@ -576,5 +576,3 @@ function booked_vehicles_home()
 
     return $res;
 }
-
-
