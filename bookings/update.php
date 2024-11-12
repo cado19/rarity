@@ -73,7 +73,7 @@
                 $total = $custom_rate * $duration;
                 // INSERT BOOKING DATA INTO THE DATABASE
 
-                $result = custom_booking_update($v_id, $d_id, $end_date, $start_time, $end_time, $custom_rate, $b_id);
+                $result = custom_booking_update($v_id, $d_id, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id);
                 if ($result == "No Success") {
                     $err = "An error occured. Try again later";
                     header("Location: index.php?page=bookings/edit&id=$b_id&err_msg=$err");
@@ -114,14 +114,14 @@
         }
 
         $posts = [$v_id, $c_id, $d_id, $a_id, $start_date, $end_date, $start_time, $end_time, $b_id];
-        // $log->info('Posts:', $posts);
+        $log->info('Posts:', $posts);
 
         // VALIDATION TO MAKE SURE BOOKING IS GREATER THAN OR EQUAL TO 3 DAYS
-        // if ($duration < 3) {
-        // 	$end_date_err = "Rental duration must be atleast 3 days";
-        // 	header("Location: index.php?page=bookings/new&end_date_err=$end_date_err");
-        // 	exit;
-        // }
+        if ($duration < 3) {
+            $end_date_err = "Rental duration must be atleast 3 days";
+            header("Location: index.php?page=bookings/new&end_date_err=$end_date_err");
+            exit;
+        }
         // INSERT BOOKING DATA INTO THE DATABASE
 
     } else {
@@ -133,5 +133,7 @@
     }
 ?>
 <script>
-	console.log(<?php echo json_encode($posts); ?>);
+	// console.log(<?php echo json_encode($v_id); ?>);
+    // console.log(<?php echo json_encode($category_id); ?>);
+    console.log(<?php echo json_encode($rate); ?>);
 </script>
