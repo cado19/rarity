@@ -208,7 +208,7 @@ function customer_license_link($id)
     // location to the URL
     $link .= $_SERVER['PHP_SELF'];
 
-    $link .= "?page=client/register/license_form&id=${id}";
+    $link .= "?page=client/register/dl_form&id=${id}";
 
     return $link;
 }
