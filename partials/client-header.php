@@ -28,6 +28,6 @@
 	<link rel="stylesheet" href="assets/client.css">
 
 
-	<title>Rarity Cars |	<?php echo $page; ?></title>
+	<title>Rarity Cars | <?php echo $page; ?></title>
 </head>
 <body>

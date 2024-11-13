@@ -10,63 +10,59 @@
 ?>
 
 <div class="container bootstrap snippets bootdeys">
-<div class="row">
-  <div class="col-xs-12 col-sm-9">
+	<div class="row">
+	  <div class="col-xs-12 col-sm-12">
 
 
-      <div class="panel panel-default">
-        <div class="panel-body text-center">
-         <img src="assets/rarity_banner.jpg" class="img-fluid">
-        </div>
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-	        <h4 class="panel-title">Capture Profile Picture</h4>
-        </div>
-
-        <div class="panel-body">
-					<form class="form-horizontal" method="POST" action="index.php?page=client/register/profile_process" enctype="multipart/form-data">
-						<input type="hidden" name="id" value="<?php echo $id; ?>">
-						<div class="form-group">
-							<div id="my_camera"></div>
-				                <input type=button value="Take Snapshot" onClick="take_snapshot()">
-
-				                <input type="hidden" name="image" class="image-tag">
-						</div>
-			          <div class="form-group">
-			            <div class="col-sm-10 col-sm-offset-2">
-			              <button type="submit" class="btn btn-outline-primary">Submit</button>
-			            </div>
-			          </div>
-					</form>
-        </div>
-
-
-	    <!-- </div> -->
-
-	    <div class="panel panel-default">
-	      <div class="panel-heading">
-		      <h4 class="panel-title">Image Preview</h4>
+	      <div class="panel panel-default">
+	        <div class="panel-body text-center">
+	         <img src="assets/rarity_banner.jpg" class="img-fluid">
+	        </div>
 	      </div>
-	      <div class="panel-body">
 
-	      	<div id="results">Your captured image will appear here...</div>
+	      <div class="panel panel-default">
+	        <div class="panel-heading">
+		        <h4 class="panel-title">Capture Profile Picture</h4>
+	        </div>
+
+	        <div class="panel-body">
+						<form class="form-horizontal" method="POST" action="index.php?page=client/register/profile_process" enctype="multipart/form-data">
+							<input type="hidden" name="id" value="<?php echo $id; ?>">
+							<div class="form-group">
+								<div id="my_camera"></div>
+
+		                <input type=button value="Take Snapshot" onClick="take_snapshot()" class="text-center">
+
+
+                <!-- <input type="hidden" name="image" class="image-tag"> -->
+							</div>
+				          <div class="form-group">
+				            <div class="col-sm-6 col-sm-offset-4">
+				              <button type="submit" class="btn btn-outline-primary">Submit</button>
+				            </div>
+				          </div>
+						</form>
+	        </div>
+
+
+		    <!-- </div> -->
+
+		    <div class="panel panel-default">
+		      <div class="panel-heading">
+			      <h4 class="panel-title">On mobile devices, scroll to the right to view full image</h4>
+		      </div>
+		    </div>
+
+		    <div class="panel panel-default">
+		    </div>
 
 
 	      </div>
-	    </div>
-
-	    <div class="panel panel-default">
-	    </div>
-
-
-      </div>
 
 
 
-  </div>
-</div>
+	  </div>
+	</div>
 </div>
 
 <?php include_once 'partials/client-webcam-footer.php';?>

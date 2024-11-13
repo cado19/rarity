@@ -39,6 +39,22 @@
             <p><b>End Date:</b><?php echo " "; ?><?php echo date("l jS \of F Y", $end_date); ?> </p>
             <p><b>Start Time:</b><?php echo " "; ?><?php show_value($voucher, 'start_time');?></p>
             <p><b>End Time:</b><?php echo " "; ?><?php show_value($voucher, 'end_time');?></p>
+            <div id="payment-details">
+                <h3>PAYMENT DETAILS: </h3>
+
+                <p><b>BANK NAME:</b> NCBA BANK</p>
+                <p><b>BRANCH:</b> WESTLANDS MALL</p>
+                <p><b>Account Name:</b> SESOM VENTURES LTD</p>
+                <p><b>ACCOUNT NUMBER:</b> 8468960011 (KES)</p>
+                <p><b>ACCOUNT NUMBER:</b> 8468960027 (USD)</p>
+                <p><b>S.W.I.F.T BIC:</b> CBAFKENX</p>
+                <p><b>BRANCH CODE:</b> 105</p>
+                <p><b>MPESA PAYBILL:</b> 400200</p>
+                <p><b>ACCOUNT:</b> 40044610</p>
+
+                <p><b>SECURE ONLINE PAYMENT PORTAL:</b></p>
+                <a href="https://payments.pesapal.com/rarityrentacar" class="btn btn-outline-success" target="_blank">Pay Now</a>
+            </div>
         </div>
     </div>
 </div>

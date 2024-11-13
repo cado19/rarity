@@ -56,3 +56,19 @@
         opacity: 1;
     }
 }
+
+#payment-details{
+    border: 3px solid #000;
+    border-radius: 8px;
+    padding: 5px;
+/*    width: 80%;*/
+}
+
+#payment-details p{
+    margin: 0;
+    padding: 0;
+}
+
+.brand {
+    width: 100%;
+}
