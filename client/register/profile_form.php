@@ -31,11 +31,12 @@
 							<div class="form-group">
 								<div id="my_camera"></div>
 
-		                <input type=button value="Take Snapshot" onClick="take_snapshot()" class="text-center">
+				                <input type=button value="Take Snapshot" onClick="take_snapshot()" class="text-center">
 
 
-                <!-- <input type="hidden" name="image" class="image-tag"> -->
+				                <input type="hidden" name="image" class="image-tag">
 							</div>
+							
 				          <div class="form-group">
 				            <div class="col-sm-6 col-sm-offset-4">
 				              <button type="submit" class="btn btn-outline-primary">Submit</button>

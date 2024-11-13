@@ -28,5 +28,16 @@
 
         } );
 
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Captured Snapshot. Proceed to save',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
     }
+
+
 
