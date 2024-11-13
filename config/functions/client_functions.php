@@ -103,7 +103,7 @@ function recent_customers()
 
         $con->beginTransaction();
 
-        $sql  = "SELECT id, first_name, last_name, email, id_no, phone_no FROM customer_details WHERE deleted = ? ORDER BY created_at DESC";
+        $sql  = "SELECT id, first_name, last_name, email, id_no, phone_no FROM customer_details WHERE deleted = ? ORDER BY created_at DESC LIMIT 10";
         $stmt = $con->prepare($sql);
         $stmt->execute([$status]);
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
