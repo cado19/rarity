@@ -19,7 +19,7 @@
     $breadcrumb_active = "Recent Clients";
 
     // File Inclusions
-    include_once 'partials/header.php';
+    include_once 'partials/refresh_header.php';
     include_once 'partials/content_start.php';
 
     // $account_id = $_SESSION['account']['id'];

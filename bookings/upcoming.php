@@ -20,7 +20,7 @@ $new_pb_link_name = "New Partner Booking";
 $breadcrumb = "Bookings";
 $breadcrumb_active = "Upcoming Bookings";
 
-include_once 'partials/header.php';
+include_once 'partials/refresh_header.php';
 include_once 'partials/content_start.php';
 
 include_once 'partials/header.php';
