@@ -213,6 +213,54 @@ function customer_license_link($id)
     return $link;
 }
 
+function voucher_link($id)
+{
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $link = "https";
+    } else {
+        $link = "http";
+    }
+
+    // Here append the common URL characters
+    $link .= "://";
+
+    // Append the host(domain name,
+    // ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
+
+    // Append the requested resource
+    // location to the URL
+    $link .= $_SERVER['PHP_SELF'];
+
+    $link .= "?page=bookings/booking_voucher&id=${id}";
+
+    return $link;
+}
+
+function cancelled_voucher_link($id)
+{
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $link = "https";
+    } else {
+        $link = "http";
+    }
+
+    // Here append the common URL characters
+    $link .= "://";
+
+    // Append the host(domain name,
+    // ip) to the URL.
+    $link .= $_SERVER['HTTP_HOST'];
+
+    // Append the requested resource
+    // location to the URL
+    $link .= $_SERVER['PHP_SELF'];
+
+    $link .= "?page=bookings/cancelled_booking_voucher&id=${id}";
+    
+    return $link;
+}
+
 // this is a general upload function that will return a status response for validation purposes
 function upload_image($destination, $temporary_name)
 {

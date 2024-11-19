@@ -40,24 +40,8 @@
 
     // get booking voucher url
     // Program to display complete URL
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        $link = "https";
-    } else {
-        $link = "http";
-    }
-
-    // Here append the common URL characters
-    $link .= "://";
-
-    // Append the host(domain name,
-    // ip) to the URL.
-    $link .= $_SERVER['HTTP_HOST'];
-
-    // Append the requested resource
-    // location to the URL
-    $link .= $_SERVER['PHP_SELF'];
-
-    $link .= "?page=bookings/booking_voucher&id=${id}";
+    $voucher_link = voucher_link($id);
+    $cancelled_voucher_link = cancelled_voucher_link($id);
 ?>
 <script>console.log(<?php echo json_encode($booking); ?>)</script>
 <section class="content">
@@ -157,14 +141,14 @@
                                           <?php if ($current_date >= $booking['end_date']): ?>
 
                                           <div class="col-12 col-sm-4">
+                                            <?php if ($booking['status'] == "cancelled"): ?>
                                             <div class="info-box bg-light">
                                               <div class="info-box-content">
-                                                <form action="index.php?page=bookings/complete" method="POST">
-                                                  <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                  <button type="submit" class="btn btn-outline-dark">Complete booking</button>
-                                                </form>
+                                                <p id="cancelled-voucher-link" class="d-none"><?php echo $cancelled_voucher_link; ?></p>
+                                                <button onclick="copyToClipboard('#cancelled-voucher-link')" class="btn btn-sm btn-danger">Copy cancelled voucher Link</button>
                                               </div>
                                             </div>
+                                            <?php endif; ?>
                                           </div>
 
                                           <?php endif;?>
@@ -233,25 +217,20 @@
                                         <?php endif;?>
                                       </div>
 
-
-
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                           <h3 class="text-primary"><i class="fa fa-file-text"></i> Contract & vouchers</h3>
-                          <p class="text-muted">This is the contract between The renter and                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
+                          <p class="text-muted">This is the contract between The renter and  <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
                           <br>
                           <div class="text-muted">
                             <p class="text-sm">Company Name
                               <b class="d-block">Rarity Cars</b>
                             </p>
                             <p class="text-sm">Client
-                              <b class="d-block"><?php echo $booking['customer_first_name']; ?><?php echo $booking['customer_last_name']; ?></b>
+                              <b class="d-block"><?php echo $booking['customer_first_name']; ?> <?php echo $booking['customer_last_name']; ?></b>
                             </p>
                           </div>
 
@@ -259,7 +238,7 @@
                             <?php if ($booking['signature_status'] == "unsigned"): ?>
                               <a href="index.php?page=contracts/edit&id=<?php echo $id; ?>" class="btn btn-sm btn-primary">Sign Contract</a>
                             <?php endif;?>
-                            <p id="customer-link" class="d-none"><?php echo $link; ?></p>
+                            <p id="customer-link" class="d-none"><?php echo $voucher_link; ?></p>
                             <button onclick="copyToClipboard('#customer-link')" class="btn btn-sm btn-danger">Copy voucher Link</button>
                             <a href="index.php?page=contracts/updated_contract&id=<?php echo $id; ?>" class="btn btn-sm btn-warning" target="_blank">Show contract</a>
                           </div>
