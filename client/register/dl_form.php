@@ -1,6 +1,6 @@
 <?php
     // THIS PAGE ALLOWS A USER TO TAKE A SELFIE FOR CLIENT'S PROFILE IMAGE
-    $page = "Upload ID images";
+    $page = "Upload DL image";
     include_once 'partials/client-header.php';
 
     if (isset($_GET['id'])) {
