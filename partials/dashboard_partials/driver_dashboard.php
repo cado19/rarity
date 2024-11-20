@@ -22,3 +22,11 @@ include_once 'partials/refresh_header.php';
 include_once 'partials/content_start.php';
 
 $account_id = $_SESSION['account']['id'];
+
+?>
+
+<section class="content">
+	<div class="container-fluid">
+		
+	</div>
+</section>
