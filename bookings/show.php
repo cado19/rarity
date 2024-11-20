@@ -40,7 +40,7 @@
 
     // get booking voucher url
     // Program to display complete URL
-    $voucher_link = voucher_link($id);
+    $voucher_link           = voucher_link($id);
     $cancelled_voucher_link = cancelled_voucher_link($id);
 ?>
 <script>console.log(<?php echo json_encode($booking); ?>)</script>
@@ -138,8 +138,6 @@
                                               </div>
                                             </div>
                                           </div>
-                                          <?php if ($current_date >= $booking['end_date']): ?>
-
                                           <div class="col-12 col-sm-4">
                                             <?php if ($booking['status'] == "cancelled"): ?>
                                             <div class="info-box bg-light">
@@ -148,9 +146,20 @@
                                                 <button onclick="copyToClipboard('#cancelled-voucher-link')" class="btn btn-sm btn-danger">Copy cancelled voucher Link</button>
                                               </div>
                                             </div>
-                                            <?php endif; ?>
+                                            <?php endif;?>
                                           </div>
+                                          <?php if ($current_date >= $booking['end_date']): ?>
 
+                                           <div class="col-12 col-sm-4">
+                                              <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                  <form action="index.php?page=bookings/complete" method="POST">
+                                                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                                    <button type="submit" class="btn btn-outline-dark">Complete booking</button>
+                                                  </form>
+                                                </div>
+                                              </div>
+                                            </div>
                                           <?php endif;?>
                                         </div>
                                       <?php endif;?>
@@ -223,14 +232,14 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                           <h3 class="text-primary"><i class="fa fa-file-text"></i> Contract & vouchers</h3>
-                          <p class="text-muted">This is the contract between The renter and  <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
+                          <p class="text-muted">This is the contract between The renter and                                                                                             <?php echo $booking['customer_first_name']; ?><?php echo " "; ?><?php echo $booking['customer_last_name']; ?>. The current state of the contract is<?php echo $booking['signature_status']; ?>.</p>
                           <br>
                           <div class="text-muted">
                             <p class="text-sm">Company Name
                               <b class="d-block">Rarity Cars</b>
                             </p>
                             <p class="text-sm">Client
-                              <b class="d-block"><?php echo $booking['customer_first_name']; ?> <?php echo $booking['customer_last_name']; ?></b>
+                              <b class="d-block"><?php echo $booking['customer_first_name']; ?><?php echo $booking['customer_last_name']; ?></b>
                             </p>
                           </div>
 
