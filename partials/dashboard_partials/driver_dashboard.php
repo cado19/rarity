@@ -45,6 +45,45 @@
             </div>
             </div>
 		</div>
+        <div class="row">
+            <div class="col">
+                <h3>Your Upcoming Bookings</h3>
+                <?php if(empty($bookings)): ?>
+                    <p class="text-center">You have no upcoming bookings</p>
+                <?php else: ?>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Booking No.</th>
+                                <th>Vehicle</th>
+                                <th>Start</th>
+                                <th>End</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php forEach($bookings as $booking): ?>
+                                <tr>
+                                    <td><?php show_value($booking, 'booking_no'); ?></td>
+                                    <td><?php show_value($booking, 'make'); ?> <?php show_value($booking, 'model'); ?></td>
+                                    <td>
+                                        <?php
+                                            $start = strtotime($booking['start_date']);
+                                            echo date("l jS \of F Y", $start);
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                            $end = strtotime($booking['end_date']);
+                                            echo date("l jS \of F Y", $end); 
+                                        ?>
+                                    </td>  
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+            </div>
+        </div>
 	</div>
 </section>
 

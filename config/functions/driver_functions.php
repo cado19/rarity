@@ -132,13 +132,14 @@ function driver_home_bookings($driver_id)
 {
     global $con;
     global $res;
+    $status = "upcoming";
 
     try {
         $con->beginTransaction();
 
-        $sql  = "SELECT b.id, b.booking_no, c.first_name, c.last_name, v.model, v.make, v.number_plate, b.start_date, b.end_date FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE b.driver_id = ? ORDER BY b.created_at DESC LIMIT 5";
+        $sql  = "SELECT b.id, b.booking_no, c.first_name, c.last_name, v.model, v.make, v.number_plate, b.start_date, b.end_date FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE b.driver_id = ? AND b.status = ? ORDER BY b.created_at DESC LIMIT 5";
         $stmt = $con->prepare($sql);
-        $stmt->execute([$driver_id]);
+        $stmt->execute([$driver_id, $status]);
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $con->commit();
