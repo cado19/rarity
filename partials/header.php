@@ -48,6 +48,9 @@
     <!-- Intl Tel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
+    <!-- Full Calendar CSS  -->
+    <link href="js/fullcalendar/lib/main.css" rel="stylesheet" />
+
 
       <!-- OUR CSS  -->
       <link rel="stylesheet" href="assets/style.css">
@@ -55,6 +58,7 @@
       <script type="text/javascript" src="assets/signature.js"></script>
 
     <title>Rarity Cars | <?php echo $page; ?></title>
+
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <style>
       #note{position:absolute;left:50px;top:35px;padding:0px;margin:0px;cursor:default;}

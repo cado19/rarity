@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$posts = [$email, $password];
 	// $log->warning('posts', $posts);
 
-	//fetch account with the above credentials
+	//fetch account with the above credentials 
 	$account = fetch_account($email);
 
 	$hashed_password = $account['password'];

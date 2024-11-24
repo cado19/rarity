@@ -46,7 +46,7 @@ function get_driver($id)
 }
 
 // save driver into the database
-function save_driver($first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth)
+function save_driver($first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth, $password)
 {
     global $con;
     global $res;
@@ -56,11 +56,11 @@ function save_driver($first_name, $last_name, $email, $id_number, $dl_number, $t
         $con->beginTransaction();
 
         $sql = "INSERT INTO drivers
-				(first_name, last_name, email, id_no, dl_no, phone_no, date_of_birth)
-				VALUES (?,?,?,?,?,?,?)";
+				(first_name, last_name, email, id_no, dl_no, phone_no, date_of_birth, password)
+				VALUES (?,?,?,?,?,?,?,?)";
 
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth])) {
+        if ($stmt->execute([$first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth, $password])) {
             $res = "Success";
         } else {
             $res = "Uncsuccessful";
@@ -128,7 +128,7 @@ function delete_driver($id)
 // DRIVER BOOKING FUNCTIONS
 
 // get bookings where driver is assigned
-function driver_bookings($driver_id)
+function driver_home_bookings($driver_id)
 {
     global $con;
     global $res;
@@ -157,7 +157,7 @@ function driver_workplan_bookings($driver_id)
     try {
         $con->beginTransaction();
 
-        $sql  = "SELECT b.id, b.booking_no, b.start_date, b.end_date FROM bookings b WHERE b.driver_id = ? ORDER BY b.created_at DESC";
+        $sql  = "SELECT b.booking_no AS title, b.start_date AS start, b.end_date AS end FROM bookings b WHERE b.driver_id = ? ORDER BY b.created_at DESC";
         $stmt = $con->prepare($sql);
         $stmt->execute([$driver_id]);
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

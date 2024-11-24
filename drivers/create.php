@@ -49,9 +49,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$tel = $_POST['tel'];
 	$date_of_birth = $_POST['date_of_birth'];
 
+    $pass            = '1234';
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
 	$details = [$first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth];
 
-	$result = save_driver($first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth);
+	$result = save_driver($first_name, $last_name, $email, $id_number, $dl_number, $tel, $date_of_birth, $hashed_password);
 
 	if ($result == "Success") {
 		$msg = "Successfully added driver";

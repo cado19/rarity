@@ -82,15 +82,11 @@ $account_id = $_SESSION['account']['id'];
 
                                 <div class="form-group">
                                     <label for="tel">Tel</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">+254</span>
-                                        </div>
-                                        <input type="text" name="tel" class="form-control form-control-border" placeholder="without '0'" required>
-                                        <?php if (isset($_GET['tel_err'])): ?>
-                                            <p class="text-danger"><?php echo $_GET['tel_err']; ?></p>
-                                        <?php endif;?>
-                                    </div>
+                                    <input type="tel" name="tel" id="phone" class="form-control form-control-border" required>
+                           
+                                    <?php if (isset($_GET['tel_err'])): ?>
+                                        <p class="text-danger"><?php echo $_GET['tel_err']; ?></p>
+                                    <?php endif;?>
                                 </div>
 
                                 <div class="form-group">

@@ -18,17 +18,52 @@
     $breadcrumb        = "Home";
     $breadcrumb_active = "Dashboard";
 
-    include_once 'partials/refresh_header.php';
+    include_once 'partials/header.php';
     include_once 'partials/content_start.php';
 
-    $account_id = $_SESSION['account']['id'];
+    $account_id   = $_SESSION['account']['id'];
+    $account_name = $_SESSION['account']['first_name'];
 
-    $bookings = home_bookings();
+    $bookings          = driver_home_bookings($account_id);
+    $workplan_bookings = driver_workplan_bookings($account_id);
 
 ?>
-
+<script>
+    console.log(<?php echo json_encode($workplan_bookings) ?>);
+</script>
 <section class="content">
 	<div class="container-fluid">
-
+		<div class="row">
+            <div class="col">
+                
+			<h1>Hello <?php echo $account_name; ?></h1>
+            <div class="row">
+                <div class="col">
+                    
+        			<div id="calendar"></div>
+                </div>
+            </div>
+            </div>
+		</div>
 	</div>
 </section>
+
+<?php include 'config/dependencies.php';?>
+
+<script>
+     document.addEventListener('DOMContentLoaded', function(){
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, 
+            {
+                initialView: 'dayGridMonth',
+                height: 650,
+                events: <?php echo json_encode($workplan_bookings);?>
+            }
+        
+        );
+        calendar.render();
+     });
+</script>
+
+
+<?php include 'partials/driver_footer.php';?>
