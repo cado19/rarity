@@ -25,7 +25,7 @@ function unique_email($email)
     return $res;
 }
 
-// get email that will be used for password reset
+// get email that will be used for password reset and role_id so as to know whether it's driver or agent password being reset
 function get_email($email)
 {
     global $con;
@@ -35,13 +35,22 @@ function get_email($email)
 
         $con->beginTransaction();
 
-        $sql  = "SELECT id FROM accounts WHERE email = ?";
+        $sql  = "SELECT id, role_id FROM accounts WHERE email = ?";
         $stmt = $con->prepare($sql);
         $stmt->execute([$email]);
+
         if ($stmt->rowCount() == 1) {
-            $res = "You may proceed";
+            $res = $stmt->fetch();
         } else {
-            $res = "No such email";
+            // if email is not in accounts table search for it in drivers table
+            $sql1  = "SELECT id, role_id FROM drivers WHERE email = ?";
+            $stmt1 = $con->prepare($sql1);
+            $stmt1->execute([$email]);
+            if ($stmt1->rowCount() == 1) {
+                $res = $stmt1->fetch();
+            } else {
+                $res = "No such person";
+            }
         }
 
         $con->commit();
@@ -76,6 +85,7 @@ function create_account($name, $email, $password)
     return $res;
 }
 
+// fetch account from accounts table or driver from drivers table 
 function fetch_account($email)
 {
     global $con;
@@ -88,11 +98,19 @@ function fetch_account($email)
         $sql  = "SELECT * FROM accounts WHERE email = ?";
         $stmt = $con->prepare($sql);
         $stmt->execute([$email]);
+
         if ($stmt->rowCount() == 1) {
             $res = $stmt->fetch();
-            // $res = ["Proceed"];
         } else {
-            $res = ["No such person"];
+            // if email is not in accounts table search for it in drivers table
+            $sql1  = "SELECT * FROM drivers WHERE email = ?";
+            $stmt1 = $con->prepare($sql1);
+            $stmt1->execute([$email]);
+            if ($stmt1->rowCount() == 1) {
+                $res = $stmt1->fetch();
+            } else {
+                $res = ["No such person"];
+            }
         }
 
         $con->commit();
@@ -123,7 +141,4 @@ function get_role_id($account_id)
     return $res;
 }
 
-function login()
-{
-
-}
+ 
