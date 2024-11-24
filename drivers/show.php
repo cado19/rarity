@@ -73,6 +73,7 @@ if (isset($_GET['id'])) {
                     <a href="index.php?page=drivers/profile_form&id=<?php echo $id; ?>" class="btn btn-primary btn-block"><b>Edit Profile Picture</b></a>
                     <a href="index.php?page=drivers/edit&id=<?php echo $id; ?>" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
                     <a href="index.php?page=drivers/delete&id=<?php echo $id; ?>" class="btn btn-danger btn-block">Delete Driver</a>
+                    <a href="index.php?page=drivers/workplan&id=<?php echo $id; ?>" class="btn btn-info btn-block">View Driver Workplan</a>
 
                   </div>
                   <!-- /.card-body -->
