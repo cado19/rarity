@@ -50,6 +50,7 @@ $log->info('vehicles', $vehicles)
                                         <th>Registration</th>
                                         <th>Category</th>
                                         <th>Rate</th>
+                                        <th>Workplan</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -61,6 +62,7 @@ $log->info('vehicles', $vehicles)
                                             <td> <?php show_value($vehicle, 'reg');?> </td>
                                             <td> <?php show_value($vehicle, 'category');?> </td>
                                             <td> <?php show_numeric_value($vehicle, 'rate');?>/- </td>
+                                            <td> <a href="index.php?page=fleet/workplan&id=<?php show_value($vehicle, 'id');?>">Workplan</a></td>
                                             <td> <a href="index.php?page=fleet/show&id=<?php show_value($vehicle, 'id');?>">Details</a> </td>
                                         </tr>
                                     <?php endforeach;?>

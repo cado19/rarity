@@ -108,6 +108,27 @@ function get_vehicle($id)
     return $res;
 }
 
+// get the make, model, number plate of a vehicle 
+function get_vehicle_min_details($vehicle_id){
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql = "SELECT id, make, model, number_plate FROM vehicle_basics WHERE id = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$vehicle_id]);
+        $res = $stmt->fetch();
+
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
 function vehicle_bookings($id)
 {
     global $con;
@@ -451,6 +472,27 @@ function resolve_issue($issue_id, $cost, $date)
         } else {
             $res = "Failed";
         }
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+function vehicle_workplan_bookings($vehicle_id)
+{
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "SELECT b.booking_no AS title, b.start_date AS start, b.end_date AS end FROM bookings b WHERE b.vehicle_id = ? ORDER BY b.created_at DESC";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$vehicle_id]);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $con->commit();
     } catch (Exception $e) {
         $con->rollback();
