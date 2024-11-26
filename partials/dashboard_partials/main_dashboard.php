@@ -28,9 +28,14 @@
     $partner_count   = partner_count();
     $bookings        = home_bookings();
     $booked_vehicles = booked_vehicles_home();
+    $active_workplan_bookings = active_workplan_bookings();
+    $upcoming_workplan_bookings = upcoming_workplan_bookings();
 
     $log->info('bookings', $bookings);
 ?>
+<script>
+    console.log(<?php echo json_encode($upcoming_workplan_bookings) ?>);
+</script>
 
     <section class="content">
         <div class="container-fluid">
@@ -124,45 +129,7 @@
 
 
                     <!-- Recent Orders Table  -->
-                             <div class="recent-orders">
-                                <h2>Recent Orders</h2>
-                                <?php if (empty($bookings)): ?>
-                                    <h4>You currently have no bookings yet</h4>
-                                <?php else: ?>
-                                <table id="example1" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Client</th>
-                                            <th>Car</th>
-                                            <th>Registration</th>
-                                            <th>Start</th>
-                                            <th>End</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($bookings as $booking): ?>
-                                            <tr>
-                                                <td><?php echo $booking['first_name']; ?><?php echo " "; ?><?php echo $booking['last_name']; ?> </td>
-                                                <td><?php echo $booking['model']; ?><?php echo " "; ?><?php echo $booking['make']; ?> </td>
-                                                <td> <?php echo $booking['number_plate']; ?> </td>
-                                                <td>
-                                                    <?php
-                                                        $start = strtotime($booking['start_date']);
-                                                        echo date("l jS \of F Y", $start);
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        $end = strtotime($booking['end_date']);
-                                                        echo date("l jS \of F Y", $end);
-                                                    ?>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach;?>
-                                    </tbody>
-                                </table>
-                                <?php endif;?>
-                                <a href="index.php?page=bookings/all">Show All</a>
+                             <div id="calendar"></div>
 
                          </div>
                      </div>
@@ -226,4 +193,34 @@
         </div>
     </section>
 
-    <?php include_once "partials/footer.php";?>
+    <?php include_once "config/dependencies.php";?>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function(){
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, 
+            {
+                initialView: 'dayGridMonth',
+                height: 650,
+                eventSources: [
+                    {
+                        events: <?php echo json_encode($active_workplan_bookings);?>,
+                        color: 'yellow',
+                        textColor: 'black'
+                    },
+
+                    {
+                        events: <?php echo json_encode($upcoming_workplan_bookings);?>,
+                        color: 'blue',
+                    },
+
+                    
+                ] 
+            }
+        
+        );
+        calendar.render();
+     });
+    </script>
+
+    <?php include_once "partials/driver_footer.php";?>

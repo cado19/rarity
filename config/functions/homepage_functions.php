@@ -100,4 +100,47 @@ function home_bookings() {
 
 	return $res;
 }
+
+function upcoming_workplan_bookings(){
+	global $con;
+	global $res;
+	$status = "upcoming";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT CONCAT(b.booking_no, ' ', c.first_name, ' ', c.last_name, ' ', v.make, ' ', v.number_plate) AS title, b.start_date AS start, b.end_date AS end FROM bookings b INNER JOIN customer_details c ON b.customer_id = c.id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE b.status = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function active_workplan_bookings(){
+	global $con;
+	global $res;
+	$status = "active";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT CONCAT(b.booking_no, ' ', c.first_name, ' ', c.last_name, ' ', v.make, ' ', v.number_plate) AS title, b.start_date AS start, b.end_date AS end FROM bookings b INNER JOIN customer_details c ON b.customer_id = c.id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE b.status = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$con->commit();
+		
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
 ?>
