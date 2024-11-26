@@ -50,6 +50,7 @@
                                     <th>Plate</th>
                                     <th>Start</th>
                                     <th>End</th>
+                                    <th>status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -72,6 +73,7 @@
                                                 echo date("l jS \of F Y", $end);
                                             ?>
                                         </td>
+                                        <td><?php show_value($booking, 'status'); ?></td>
                                         <td> <a href="index.php?page=bookings/show&id=<?php echo $booking['id']; ?>">Details</a> </td>
                                     </tr>
                                 <?php endforeach;?>
