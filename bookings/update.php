@@ -63,17 +63,17 @@
             $rate          = $rate_response['rate'];
             if ($rate == 0 && $role_id == 2) {
                 $rate_err = "You cannot set custom rate for this category. Contact Admin";
-                header("Location: index.php?page=bookings/new&rate_err=$rate_err");
+                header("Location: index.php?page=bookings/edit&rate_err=$rate_err");
                 exit;
             } elseif ($custom_rate < $rate) {
                 $rate_err = "Set amount is too low. Min for selected vehicle: $rate";
-                header("Location: index.php?page=bookings/new&rate_err=$rate_err");
+                header("Location: index.php?page=bookings/edit&rate_err=$rate_err");
                 exit;
             } else {
                 $total = $custom_rate * $duration;
                 // INSERT BOOKING DATA INTO THE DATABASE
 
-                $result = custom_booking_update($v_id, $d_id, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id);
+                $result = custom_booking_update($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id);
                 if ($result == "No Success") {
                     $err = "An error occured. Try again later";
                     header("Location: index.php?page=bookings/edit&id=$b_id&err_msg=$err");
@@ -90,7 +90,7 @@
 
         } else {
             $custom_rate = 0;
-            $result      = update_booking_details($v_id, $d_id, $end_date, $start_time, $end_time, $custom_rate, $b_id);
+            $result      = update_booking_details($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id);
             if ($result == "No Success") {
                 $err = "An error occured. Try again later";
                 header("Location: index.php?page=bookings/edit&id=$b_id&err_msg=$err");
@@ -117,11 +117,11 @@
         $log->info('Posts:', $posts);
 
         // VALIDATION TO MAKE SURE BOOKING IS GREATER THAN OR EQUAL TO 3 DAYS
-        if ($duration < 3) {
-            $end_date_err = "Rental duration must be atleast 3 days";
-            header("Location: index.php?page=bookings/new&end_date_err=$end_date_err");
-            exit;
-        }
+        // if ($duration < 3) {
+        //     $end_date_err = "Rental duration must be atleast 3 days";
+        //     header("Location: index.php?page=bookings/edit&end_date_err=$end_date_err");
+        //     exit;
+        // }
         // INSERT BOOKING DATA INTO THE DATABASE
 
     } else {

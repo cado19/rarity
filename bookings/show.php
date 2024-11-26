@@ -239,7 +239,10 @@
                               <b class="d-block">Rarity Cars</b>
                             </p>
                             <p class="text-sm">Client
-                              <b class="d-block"><?php echo $booking['customer_first_name']; ?><?php echo $booking['customer_last_name']; ?></b>
+                              <b class="d-block"><?php echo $booking['customer_first_name']; ?> <?php echo $booking['customer_last_name']; ?></b>
+                            </p>
+                            <p class="text-sm">Total
+                              <b class="d-block"><?php show_numeric_value($booking, 'total'); ?></b>
                             </p>
                           </div>
 
