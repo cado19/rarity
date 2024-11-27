@@ -132,6 +132,18 @@
                              <div id="calendar"></div>
 
                          </div>
+                         <div class="card-footer">
+                            <div class="d-flex flex-row align-items-center">
+                                
+                                 <div class="blue-key"></div>
+                                 <div class="text ml-3 mr-3"> Upcoming Bookings </div>
+
+                                 <div class="yellow-key"></div>
+                                 <div class="text ml-3">Active Bookings </div>
+                            </div>
+
+                             
+                         </div>
                      </div>
                 </div>
             </div>
