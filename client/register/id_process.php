@@ -6,13 +6,13 @@
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id = $_POST['id'];
     // VALIDATIONS
-    if (empty($_FILES['id_image'])) {
+    if (($_FILES['id_image']["name"] == '')) {
         $err_msg = "Front side id image is required";
         header("Location: index.php?page=client/register/id_form&err_msg=$err_msg&id=$id");
         exit;
     }
 
-    if (empty($_FILES['id_image_back'])) {
+    if (($_FILES['id_image_back']["name"] == '')) {
         $err_msg = "Back side id image is required";
         header("Location: index.php?page=client/register/id_form&err_msg=$err_msg&id=$id");
         exit;

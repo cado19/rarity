@@ -4,7 +4,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$msg = "";
 
 	$id = $_POST['id'];
-
+	if ($_FILES["dl_image"]["name"] == '') {
+		$err_msg = "DL Image is required";
+		header("Location: index.php?page=client/id_form&id=$id&err_msg=$err_msg");
+		exit;
+	}
 	$filename = $_FILES["dl_image"]["name"];
 	$tempname = $_FILES["dl_image"]["tmp_name"];
 	// new file name to eliminate conflicts even if someone uploads the same file twice for different records.
@@ -18,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$stmt->execute([$filenameNew, $id]);
 
 	// Upload the image to the server
-	$result   = upload_image($folder, $tempname);
+	$result = upload_image($folder, $tempname);
 
 	// Now let's move the uploaded image into the folder: image
 	if ($result == "Success") {
