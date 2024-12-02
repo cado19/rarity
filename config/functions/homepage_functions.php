@@ -88,7 +88,7 @@ function vehicles_returning_this_week_count(){
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT count(b.id) AS return_count FROM bookings b WHERE week(b.end_date) = week(now()) GROUP BY b.id;";
+		$sql = "SELECT count(b.id) AS return_count FROM bookings b WHERE week(b.end_date) = week(now())";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->fetch(PDO::FETCH_ASSOC);
