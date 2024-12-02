@@ -83,6 +83,7 @@
 							<tr>
 								<th>Issue</th>
 								<th>Status</th>
+                <th>Cost</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -91,6 +92,7 @@
 								<tr>
 									<td><?php show_value($issue, 'title')?></td>
 									<td><?php show_value($issue, 'status')?></td>
+                  <td><?php show_numeric_value($issue, 'resolution_cost')?></td>
 									<td><a href="index.php?page=fleet/issue&id=<?php echo $issue['id'] ?>">Details</a></td>
 								</tr>
 							<?php endforeach;?>

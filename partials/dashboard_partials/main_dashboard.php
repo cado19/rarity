@@ -25,6 +25,7 @@
     $vehicle_count   = vehicle_count();
     $customer_count  = customer_count();
     $active_bookings = home_active_bookings();
+    $vehicles_returning_this_week_count = vehicles_returning_this_week_count();
     $partner_count   = partner_count();
     $bookings        = home_bookings();
     $booked_vehicles = booked_vehicles_home();
@@ -33,9 +34,7 @@
 
     $log->info('bookings', $bookings);
 ?>
-<script>
-    console.log(<?php echo json_encode($upcoming_workplan_bookings) ?>);
-</script>
+
 
     <section class="content">
         <div class="container-fluid">
@@ -94,14 +93,14 @@
                     <!-- small box -->
                     <div class="small-box bg-primary">
                       <div class="inner">
-                        <h3><?php echo number_format($partner_count['number_of_partners']); ?></h3>
+                        <h3><?php echo number_format($vehicles_returning_this_week_count['return_count']); ?></h3>
 
-                        <p>Your partners</p>
+                        <p>Bookings ending this week</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-people"></i>
                       </div>
-                      <a href="index.php?page=partners/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                      <a href="index.php?page=bookings/ending_this_week" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->

@@ -80,6 +80,27 @@ function partner_count() {
 	return $res;
 }
 
+// get the number of cars returning this week
+function vehicles_returning_this_week_count(){
+	global $con;
+	global $res;
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT count(b.id) AS return_count FROM bookings b WHERE week(b.end_date) = week(now()) GROUP BY b.id;";
+		$stmt = $con->prepare($sql);
+		$stmt->execute();
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (\Throwable $th) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
 function home_bookings() {
 	global $con;
 	global $res;

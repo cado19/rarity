@@ -350,6 +350,7 @@ function is_partner_vehicle($vehicle_id)
 }
 
 // VEHICLE ISSUES
+// get issues of a specific vehicle 
 function all_issues($vehicle_id)
 {
     global $con;
@@ -413,7 +414,7 @@ function issues_count($vehicle_id)
     return $res;
 }
 
-function save_issue($vehicle_id, $title, $description)
+function save_issue($vehicle_id, $title, $description, $cost, $issue_date)
 {
     global $con;
     global $res;
@@ -421,9 +422,9 @@ function save_issue($vehicle_id, $title, $description)
     try {
         $con->beginTransaction();
 
-        $sql  = "INSERT INTO vehicle_issues (vehicle_id, title, description) VALUES (?,?,?)";
+        $sql  = "INSERT INTO vehicle_issues (vehicle_id, title, description, resolution_cost, resolution_date) VALUES (?,?,?,?,?)";
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$vehicle_id, $title, $description])) {
+        if ($stmt->execute([$vehicle_id, $title, $description, $cost, $issue_date])) {
             $res = "Success";
         } else {
             $res = "Failed";
@@ -480,6 +481,27 @@ function resolve_issue($issue_id, $cost, $date)
     return $res;
 }
 
+function get_issues(){
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "SELECT v.model, v.make, vi.title AS title, vi.resolution_cost AS cost, vi.resolution_date FROM vehicle_issues vi INNER JOIN vehicle_basics v ON vi.vehicle_id = v.id";
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll();
+
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+
+    return $res;
+}
+
+// WORKPLAN 
 function vehicle_workplan_bookings($vehicle_id)
 {
     global $con;

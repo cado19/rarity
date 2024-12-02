@@ -82,6 +82,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="index.php?page=maintenance/all_issues" class="nav-link">
+                          <i class="nav-icon fa fa-wrench" class="nav-link"></i>
+                          <p>
+                            Issue Management
+                          </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="index.php?page=bookings/all" class="nav-link">
                           <i class="nav-icon fa fa-list"></i>
                           <p>

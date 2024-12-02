@@ -48,6 +48,27 @@
 			                    <label>Describe the issue</label>
 		                        <textarea class="form-control" rows="3" placeholder="Enter ..." name="description"></textarea>
 			                </div>
+			                
+			                <div class="form-group">
+			                    <label>Cost to resolve the issue</label>
+		                        <input type="text" name="cost" class="form-control form-control-border">
+								<?php if (isset($_GET['cost_err'])): ?>
+									<p class="text-danger"><?php echo $_GET['cost_err']; ?></p>
+								<?php endif;?>
+			                </div>
+
+                            <div class="form-group">
+                                <label for="date_of_birth">Issue Date</label>
+                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                    <input type="text" name="issue_date" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                                <?php if (isset($_GET['issue_date_err'])): ?>
+                                    <p class="text-danger"> <?php echo $_GET['issue_date_err']; ?> </p>
+                                <?php endif;?>
+                            </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-dark">Add Issue</button>
