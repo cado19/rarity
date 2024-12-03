@@ -448,7 +448,7 @@ function save_custom_booking($v_id, $c_id, $d_id, $a_id, $start_date, $end_date,
     return $res;
 }
 
-function update_booking_details($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id)
+function update_booking_details($v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id)
 {
     global $con;
     global $res;
@@ -456,9 +456,9 @@ function update_booking_details($v_id, $d_id, $start_date, $end_date, $start_tim
     try {
         $con->beginTransaction();
 
-        $sql  = "UPDATE bookings SET vehicle_id = ?, driver_id = ?, start_date = ?, end_date = ?, start_time = ?, end_time = ?, custom_rate = ? WHERE id = ?";
+        $sql  = "UPDATE bookings SET vehicle_id = ?, customer_id = ?, driver_id = ?, start_date = ?, end_date = ?, start_time = ?, end_time = ?, custom_rate = ? WHERE id = ?";
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id])) {
+        if ($stmt->execute([$v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id])) {
             $res = "Success";
         } else {
             $res = "No Success";
@@ -472,16 +472,16 @@ function update_booking_details($v_id, $d_id, $start_date, $end_date, $start_tim
     return $res;
 }
 
-function custom_booking_update($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id)
+function custom_booking_update($v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id)
 {
     global $con;
     global $res;
 
     try {
         $con->beginTransaction();
-        $sql  = "UPDATE bookings SET vehicle_id = ?, driver_id = ?, start_date = ?, end_date = ?, start_time = ?, end_time = ?, custom_rate = ?, total = ? WHERE id = ?";
+        $sql  = "UPDATE bookings SET vehicle_id = ?, customer_id = ?, driver_id = ?, start_date = ?, end_date = ?, start_time = ?, end_time = ?, custom_rate = ?, total = ? WHERE id = ?";
         $stmt = $con->prepare($sql);
-        if ($stmt->execute([$v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id])) {
+        if ($stmt->execute([$v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id])) {
             $res = "Success";
         } else {
             $res = "No Success";

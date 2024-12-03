@@ -73,7 +73,7 @@
                 $total = $custom_rate * $duration;
                 // INSERT BOOKING DATA INTO THE DATABASE
 
-                $result = custom_booking_update($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id);
+                $result = custom_booking_update($v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $total, $b_id);
                 if ($result == "No Success") {
                     $err = "An error occured. Try again later";
                     header("Location: index.php?page=bookings/edit&id=$b_id&err_msg=$err");
@@ -90,7 +90,7 @@
 
         } else {
             $custom_rate = 0;
-            $result      = update_booking_details($v_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id);
+            $result      = update_booking_details($v_id, $c_id, $d_id, $start_date, $end_date, $start_time, $end_time, $custom_rate, $b_id);
             if ($result == "No Success") {
                 $err = "An error occured. Try again later";
                 header("Location: index.php?page=bookings/edit&id=$b_id&err_msg=$err");
