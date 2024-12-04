@@ -246,6 +246,29 @@ function update_daily_rate($id, $rate)
 
     return $res;
 }
+// function to set the target for a vehicle 
+function save_target($id, $target){
+    global $con;
+    global $res;
+
+    try {
+        $con->beginTransaction();
+
+        $sql  = "UPDATE vehicle_pricing SET monthly_target = ? WHERE vehicle_id = ?";
+        $stmt = $con->prepare($sql);
+        if ($stmt->execute([$target, $id])) {
+            $res = "Success";
+        } else {
+            $res = "Uncsuccessful";
+        }
+
+        $con->commit();
+    } catch (Exception $e) {
+        $con->rollback();
+    }
+    
+    return $res;
+}
 
 // function to delete a vehicle
 function delete_vehicle($id)

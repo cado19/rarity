@@ -7,18 +7,18 @@
     // head to home screen if user is not admin.
     include_once 'config/user_auth_script.php';
 
-    $page = "New Driver";
+    $page = "Edit Vehicle";
 
     // Navbar Links. We set these link in the navbar programatically.
     $home_link      = "index.php?page=fleet/all";
-    $home_link_name = "All Drivers";
+    $home_link_name = "All Vehicles";
 
     $new_link      = "index.php?page=fleet/new";
-    $new_link_name = "New Driver";
+    $new_link_name = "New Vehicle";
 
     // Breadcrumb variables for programatically setting breadcrumbs in content_start.php
-    $breadcrumb        = "Drivers";
-    $breadcrumb_active = "New Driver";
+    $breadcrumb        = "Vehicles";
+    $breadcrumb_active = "Edit Vehicle";
 
     include_once 'partials/header.php';
     include_once 'partials/content_start.php';

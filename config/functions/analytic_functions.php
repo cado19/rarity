@@ -91,11 +91,12 @@ function most_profitable_client() {
 function most_profitable_vehicles() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT v.model, v.make, sum(b.total) AS Income FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id AND v.partner_id IS NULL GROUP BY v.id ORDER BY Income DESC LIMIT 5";
+		$sql = "SELECT v.model, v.make, sum(b.total) AS Income FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE b.status != ? GROUP BY v.id ORDER BY Income DESC LIMIT 5";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->fetchAll();
@@ -108,17 +109,18 @@ function most_profitable_vehicles() {
 	return $res;
 }
 
-// vehicle that has generated the most income
+// vehicle that has generated the most income OVERALL
 function most_profitable_vehicle() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT v.model, v.make, sum(b.total) AS Income FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id AND v.partner_id IS NULL GROUP BY v.id ORDER BY Income DESC LIMIT 1";
+		$sql = "SELECT v.model, v.make, v.number_plate, sum(b.total) AS Income FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE b.status != ? GROUP BY v.id ORDER BY Income DESC LIMIT 1";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
 		$res = $stmt->fetch();
 
 		$con->commit();
@@ -129,17 +131,42 @@ function most_profitable_vehicle() {
 	return $res;
 }
 
-// vehicles that have been booked the most
-function most_popular_vehicles() {
+// vehicle that has been booked the most OVERALL
+function most_popular_vehicle() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT vb.id, vb.model, vb.make, count(vb.id) AS total FROM vehicle_basics vb INNER JOIN bookings bk ON vb.id = bk.vehicle_id GROUP BY vb.id ORDER BY count(vb.id) DESC LIMIT 3";
+		$sql = "SELECT v.model, v.make, v.number_plate, count(v.id) AS total FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE b.status != ? GROUP BY v.id ORDER BY total DESC LIMIT 1";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
+
+// vehicles that have been booked the most
+function most_popular_vehicles() {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT vb.id, vb.model, vb.make, vb.number_plate, count(vb.id) AS total FROM vehicle_basics vb INNER JOIN bookings b ON vb.id = b.vehicle_id WHERE b.status != ? GROUP BY vb.id ORDER BY count(vb.id) DESC LIMIT 10";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
 		$res = $stmt->fetchAll();
 
 		$con->commit();
@@ -149,6 +176,120 @@ function most_popular_vehicles() {
 
 	return $res;
 }
+
+// get daily rate and also vehicle adr and total FOR the year (for now 3 months) in one table
+function all_vehicles_totals() {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT v.id, v.make, v.model, v.number_plate, sum(b.total) AS total, (SELECT daily_rate FROM vehicle_pricing vp WHERE vp.vehicle_id = v.id) AS daily_rate, sum(b.total) / 90 AS ADR FROM bookings b INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE b.status != ? group by v.id;";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+		// **** MONTHLY VEHICLE ANALYTICS ****
+// vehicle that has generated the most income IN GIVEN MONTH
+function month_most_profitable_vehicle($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT v.model, v.make, v.number_plate, sum(b.total) AS Income FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id  WHERE month(b.created_at) = ? AND b.status != ? GROUP BY v.id ORDER BY Income DESC LIMIT 1";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month,$status]);
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// vehicle that has been booked the most IN THE MONTH
+function month_most_popular_vehicle($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT v.model, v.make, v.number_plate, count(v.id) AS total FROM vehicle_basics v INNER JOIN bookings b ON v.id = b.vehicle_id WHERE month(b.created_at) = ? AND b.status != ? GROUP BY v.id ORDER BY total DESC LIMIT 1";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month,$status]);
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
+// vehicles that have been booked the most IN THE MONTH
+function month_most_popular_vehicles($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT vb.id, vb.model, vb.make, vb.number_plate, count(vb.id) AS total FROM vehicle_basics vb INNER JOIN bookings b ON vb.id = b.vehicle_id WHERE month(b.created_at) = ? AND b.status != ? GROUP BY vb.id ORDER BY total DESC LIMIT 5";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month,$status]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// get daily rate and also vehicle adr and total FOR MONTH in one table
+function month_vehicles_totals($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT v.id, v.make, v.model, v.number_plate, sum(b.total) AS total, (SELECT daily_rate FROM vehicle_pricing vp WHERE vp.vehicle_id = v.id) AS daily_rate, sum(b.total) / 30 AS ADR FROM bookings b INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE month(b.created_at) = ? AND b.status != ? group by v.id;";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month,$status]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
 
 //   ******************* */ BOOKING ANALYTIC FUNCTIONS ******************* */
 // get bookings ending in the current month
@@ -243,6 +384,29 @@ function booking_count_this_month() {
 		$con->beginTransaction();
 
 		$sql = "SELECT monthname(created_at) AS Month, COUNT(id) AS total FROM bookings WHERE datediff(now(), created_at) <= 30 GROUP BY Month";
+		$stmt = $con->prepare($sql);
+		$stmt->execute();
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// ****************************** NEW ANALYTICS ******************************
+// CURRENT MONTH ANALYTICS
+
+function income_this_month(){
+	global $con;
+	global $res;
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT v.model, v.make, b.monthname(created_at) AS Month, sum(b.total) AS total FROM bookings b INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE datediff(now(), created_at) <= 30 GROUP BY v.id";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->fetch();

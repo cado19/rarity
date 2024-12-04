@@ -1,6 +1,9 @@
 <?php
 // FOR NOW THIS WILL BE THE ANALYTIC DASHBOARD. WE'LL USE IT AS THE LANDING PAGE FOR ANALYTICS MODULE
 
+    // head to login screen if user is not signed in.
+    include_once 'config/session_script.php';
+
 //page name. We set this inn the content start and also in the page title programatically
 $page = "Analytics";
 
@@ -54,33 +57,34 @@ $booking_count_this_month = booking_count_this_month();
 	<div class="container-fluid">
 		<!-- a row with info boxes as links to booking, customer and vehicle analytics  -->
 		<div class="row">
-			<div class="col-12 col-sm-4">
-              <div class="info-box bg-light">
+					<div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
                 <div class="info-box-content">
                   <span class="info-box-text text-center text-muted">More booking Stats</span>
                   <a href="index.php?page=fleet/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-              </div>
             </div>
+          </div>
 
-            <div class="col-12 col-sm-4">
-              <div class="info-box bg-light">
-                <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">More Client Stats</span>
-                  <a href="index.php?page=fleet/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">More Client Stats</span>
+                <a href="index.php?page=fleet/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
+          </div>
 
-            <div class="col-12 col-sm-4">
-              <div class="info-box bg-light">
-                <div class="info-box-content">
-                  <span class="info-box-text text-center text-muted">More Vehicle Stats</span>
-                  <a href="index.php?page=fleet/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">More Vehicle Stats</span>
+                <a href="index.php?page=analytics/vehicle_stats/landing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div>
-        </div>
+          </div>
+
+    </div>
 		<!-- a row with a graph showing revenue last 3 months   -->
         <div class="row">
            <div class="col-8">

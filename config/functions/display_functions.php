@@ -30,6 +30,25 @@ function show_numeric_value($object, $value)
 
 }
 
+// function that will show monetary numeric record value or NA if absent
+function show_monetary_value($object, $value)
+{
+    global $res;
+    if (array_key_exists($value, $object)) {
+        if (isset($object[$value])) {
+            $res = (float) ($object[$value]);
+            echo number_format($res, 2);
+        } else {
+            echo 0;
+        }
+    } else {
+        echo 0;
+    }
+
+}
+
+
+
 // function that will show date record value or NA if absent
 function show_date_value($object, $value)
 {
