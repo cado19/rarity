@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
 
 ?>
 <script>
-    console.log(<?php echo json_encode($no_of_issues); ?>);
+    console.log(<?php echo json_encode($vehicle); ?>);
 </script>
 <section class="content">
     <div class="container-fluid">
@@ -68,6 +68,17 @@ if (isset($_GET['id'])) {
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-12 col-sm-4">
+                      <div class="info-box bg-light">
+                        <div class="info-box-content">
+                          <span class="info-box-text text-center text-muted">Monthly Target: <?php show_numeric_value($vehicle, 'monthly_target');?>/-</span>
+                          <span class="info-box-number text-center text-muted mb-0"><a href="index.php?page=fleet/target_form&id=<?php echo $id; ?>">Set <span class="fa fa-arrow-right"></span></a></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    
 
                 </div>
             </div>
