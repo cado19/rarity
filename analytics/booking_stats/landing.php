@@ -114,6 +114,7 @@ $completion_percentage = $completed_booking_count['count'] / $booking_count['cou
 						<div class="progress-group">
 							Booking Completion Rate
 							<span class="float-right">
+								<b><?php echo number_format($completion_percentage, 2); ?>%</b>
 								<b><?php show_numeric_value($completed_booking_count, 'count'); ?></b>
 								/<?php show_numeric_value($booking_count, 'count'); ?>
 							</span>
@@ -125,8 +126,9 @@ $completion_percentage = $completed_booking_count['count'] / $booking_count['cou
 						<div class="progress-group">
 							Booking Cancellation Rate
 							<span class="float-right">
-								<b><?php show_numeric_value($cancelled_booking_count, 'count'); ?></b>
-								/<?php show_numeric_value($booking_count, 'count'); ?>
+								<b><?php echo number_format($cancellation_percentage, 2); ?>%</b>
+								[<b><?php show_numeric_value($cancelled_booking_count, 'count'); ?></b>
+								/<?php show_numeric_value($booking_count, 'count'); ?>]
 							</span>
 							<div class="progress progress-sm">
 								<div class="progress-bar bg-danger" style="width: <?php echo $cancellation_percentage; ?>%"></div>

@@ -412,7 +412,7 @@ function bookings_this_month($month) {
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, c.first_name, c.last_name, v.model, v.make, v.number_plate FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE  month(b.created_at) = ?";
+		$sql = "SELECT b.id, c.first_name, c.last_name, v.model, v.make, v.number_plate FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$month]);
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -434,7 +434,7 @@ function cancelled_booking_count_this_month($month){
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status != ? AND month(b.created_at) = ?";
+		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
