@@ -118,7 +118,7 @@ $booking_count_this_month = booking_count_this_month();
                            <!-- DOUGHNUT CHART -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Top 3 Vehicles by popularity</h3>
+                        <h3 class="card-title">Most popular vehicle categories</h3>
 
                         <div class="card-tools">
                           <button type="button" class="btn btn-tool" data-card-widget="collapse">
