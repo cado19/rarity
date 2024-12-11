@@ -50,10 +50,12 @@
 	$booking_count = total_month_booking_count($month);
 	$completed_booking_count = completed_booking_count_this_month($month);
 	$cancelled_booking_count = cancelled_booking_count_this_month($month);
+	$active_booking_count = cancelled_booking_count_this_month($month);
 
 	// PERCENTAGES
 	$cancellation_percentage = $cancelled_booking_count['count'] / $booking_count['count'] * 100;
 	$completion_percentage = $completed_booking_count['count'] / $booking_count['count'] * 100;
+	$activation_percentage = $active_booking_count['count'] / $booking_count['count'] * 100;
 ?>
 
 <section class="content">
@@ -89,6 +91,8 @@
 	            </div>
 	          </div>
 	        </div>
+
+
 
 	        
 	    </div>
@@ -135,6 +139,17 @@
 							</div>
 						</div>
 
+						<div class="progress-group">
+							Booking Activation Rate
+							<span class="float-right">
+								<b><?php echo number_format($activation_percentage, 2); ?>%</b>
+								[<b><?php show_numeric_value($active_booking_count, 'count'); ?></b>
+								/<?php show_numeric_value($booking_count, 'count'); ?>]
+							</span>
+							<div class="progress progress-sm">
+								<div class="progress-bar bg-success" style="width: <?php echo $activation_percentage; ?>%"></div>
+							</div>
+						</div>
 						
 					</div>
 				</div>

@@ -358,6 +358,30 @@ function cancelled_booking_count(){
 	return $res;
 }
 
+function active_booking_count(){
+	global $con;
+	global $res;
+	$status = "active";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
+
 function bookings_start_by_day(){
 	global $con;
 	global $res;
@@ -468,6 +492,30 @@ function completed_booking_count_this_month($month){
 
 	return $res;
 }
+
+function active_booking_count_this_month($month){
+	global $con;
+	global $res;
+	$status = "active";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status, $month]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
 
 
 
