@@ -270,6 +270,28 @@ function most_popular_vehicles() {
 	return $res;
 }
 
+// most popular vehicle categories 
+function most_popular_categories(){
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT vb.id, vb.category_id, count(vb.category_id) AS total, cat.name AS category FROM vehicle_basics vb INNER JOIN bookings b ON vb.id = b.vehicle_id INNER JOIN vehicle_categories cat ON vb.category_id = cat.id WHERE b.status != ? GROUP BY vb.id ORDER BY count(vb.category_id) DESC LIMIT 10";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
 // get daily rate and also vehicle adr and total FOR the year (for now 3 months) in one table
 function all_vehicles_totals() {
 	global $con;

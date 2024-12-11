@@ -33,15 +33,16 @@ foreach ($last_three_money as $cash) {
 }
 
 // most popular vehicles
-$popular_vehicles = most_popular_vehicles();
+$popular_vehicles = most_popular_categories();
 $vehicles = array();
 $popularity = array();
 foreach ($popular_vehicles as $car) {
-	$car_name = $car['model'] . " " . $car['make'];
+	$car_name = $car['category'];
 	array_push($vehicles, $car_name);
 	array_push($popularity, $car['total']);
 }
 // END GRAPH SCRIPTS
+
 
 // INFO BOX SCRIPTS
 $earned_revenue = earned_revenue();
