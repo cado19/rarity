@@ -5,13 +5,14 @@
 function client_most_bookings() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id GROUP BY c.id ORDER BY Bookings DESC LIMIT 5";
+		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? GROUP BY c.id ORDER BY Bookings DESC LIMIT 10";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
 		$res = $stmt->fetchAll();
 
 		$con->commit();
@@ -292,8 +293,7 @@ function month_vehicles_totals($month) {
 
 
 //   ******************* */ BOOKING ANALYTIC FUNCTIONS ******************* */
-// get bookings ending in the current month
-function bookings_this_month() {
+function total_booking_count(){
 	global $con;
 	global $res;
 
@@ -301,9 +301,75 @@ function bookings_this_month() {
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, c.first_name, c.last_name, v.model, v.make, v.number_plate FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE datediff(now(), b.created_at) <= 30";
+		$sql = "SELECT count(b.id) AS count FROM bookings b";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function completed_booking_count(){
+	global $con;
+	global $res;
+	$status = "complete";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function cancelled_booking_count(){
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function bookings_start_by_day(){
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		
+		$con->beginTransaction();
+
+		$sql = "SELECT DAYNAME(b.start_date) AS day, count(b.id) AS count FROM bookings b WHERE b.status != 'cancelled' GROUP BY DAYOFWEEK(b.start_date), DAYNAME(b.start_date) ORDER BY DAYOFWEEK(b.start_date)";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status]);
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$con->commit();
@@ -313,6 +379,97 @@ function bookings_this_month() {
 
 	return $res;
 }
+
+
+		// **** MONTHLY BOOKING ANALYTICS ****
+function total_month_booking_count($month){
+	global $con;
+	global $res;
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE  month(b.created_at) = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month]);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// get bookings created in a specified month
+function bookings_this_month($month) {
+	global $con;
+	global $res;
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT b.id, c.first_name, c.last_name, v.model, v.make, v.number_plate FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id INNER JOIN vehicle_basics v ON b.vehicle_id = v.id WHERE  month(b.created_at) = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$month]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function cancelled_booking_count_this_month($month){
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status != ? AND month(b.created_at) = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status, $month]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+function completed_booking_count_this_month($month){
+	global $con;
+	global $res;
+	$status = "completed";
+
+	try {
+
+		$con->beginTransaction();
+
+		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status, $month]);
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+
 
 //   ******************* */ DASHBOARD ANALYTIC FUNCTIONS ******************* */
 function income_last_three_months() {
@@ -375,15 +532,15 @@ function expected_revenue() {
 	return $res;
 }
 
-// booking count this month
-function booking_count_this_month() {
+// get the number of bookings in the current month
+function booking_count_this_month(){
 	global $con;
 	global $res;
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT monthname(created_at) AS Month, COUNT(id) AS total FROM bookings WHERE datediff(now(), created_at) <= 30 GROUP BY Month";
+		$sql = "SELECT count(b.id) AS total FROM bookings b  WHERE datediff(now(), created_at) <= 30";
 		$stmt = $con->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->fetch();
@@ -395,6 +552,8 @@ function booking_count_this_month() {
 
 	return $res;
 }
+
+
 
 // ****************************** NEW ANALYTICS ******************************
 // CURRENT MONTH ANALYTICS

@@ -77,8 +77,8 @@
 <?php if ($page == "Client Analytics"): ?>
     <!-- profitable client chart script -->
     <script>
-        const client_names =                                                                                     <?php echo json_encode($loaded_client_names); ?>;
-        const revenue =                                                                      <?php echo json_encode($loaded_clients); ?>;
+        const client_names = <?php echo json_encode($loaded_client_names); ?>;
+        const revenue = <?php echo json_encode($loaded_clients); ?>;
         //setup block
         const data = {
             labels: client_names,
@@ -123,8 +123,8 @@
 <?php if ($page == "Analytics"): ?>
     <!-- 90 day income chart script -->
     <script>
-        const months =                                                                   <?php echo json_encode($months); ?>;
-        const money =                                                                <?php echo json_encode($money); ?>;
+        const months = <?php echo json_encode($months); ?>;
+        const money =  <?php echo json_encode($money); ?>;
         //setup block
         const income_data = {
             labels: months,
@@ -164,9 +164,11 @@
             income_config
         );
     </script>
+
+
     <script>
-        const vehicles =                                                                         <?php echo json_encode($vehicles); ?>;
-        const popularity =                                                                               <?php echo json_encode($popularity); ?>;
+        const vehicles = <?php echo json_encode($vehicles); ?>;
+        const popularity = <?php echo json_encode($popularity); ?>;
         //setup block
         const data = {
             labels: vehicles,
@@ -176,7 +178,10 @@
                 backgroundColor: [
                     'rgb(220, 20, 60)',
                     'rgb(255, 140, 0)',
-                    'rgb(255, 87, 51)'
+                    'rgb(255, 87, 51)',
+                    'rgb(50, 117, 168)',
+                    'rgb(7, 30, 48)',
+                    'rgb(15, 21, 26)',
 
                 ],
                 borderColor: [
@@ -209,6 +214,52 @@
 
 
 <?php endif;?>
+
+<?php if($page == "General Booking Stats"): ?>
+        <!-- 90 day income chart script -->
+    <script>
+        const months = <?php echo json_encode($months); ?>;
+        const money =  <?php echo json_encode($money); ?>;
+        //setup block
+        const income_data = {
+            labels: months,
+            datasets: [{
+                label: 'Revenue last 90 Days',
+                data: money,
+                backgroundColor: [
+                   'rgb(139, 0, 0)',
+                    'rgb(255, 215, 0)',
+                    'rgb(255, 0, 255)'
+
+                ],
+                borderColor: [
+                    'rgb(139, 0, 0)',
+                    'rgb(255, 215, 0)',
+                    'rgb(255, 0, 255)'
+
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        //config block
+        const income_config = {
+            type: 'bar',
+            options: {
+                scales: {
+                    y: {beginAtZero: true}
+                }
+            },
+            data: income_data
+        };
+
+        //render block
+        const incomeChart = new Chart(
+            document.getElementById('threeMonthChart').getContext('2d'),
+            income_config
+        );
+    </script>
+<?php endif; ?>
 
 
 <?php include_once 'config/notifications.php';?>

@@ -61,7 +61,7 @@ $booking_count_this_month = booking_count_this_month();
             <div class="info-box bg-light">
                 <div class="info-box-content">
                   <span class="info-box-text text-center text-muted">More booking Stats</span>
-                  <a href="index.php?page=fleet/all" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="index.php?page=analytics/booking_stats/landing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
-<!-- display table showing an overview of stats with a link to details --><!-- show options for month stats and year stats  -->
+ <!-- display table showing an overview of stats with a link to details --><!-- show options for month stats and year stats  -->
 <?php
-// FOR NOW THIS WILL BE THE ANALYTIC DASHBOARD. WE'LL USE IT AS THE LANDING PAGE FOR ANALYTICS MODULE
+// FOR NOW THIS WILL BE THE MONTHLY VEHICLE ANALYTIC DASHBOARD. WE'LL USE IT AS THE LANDING PAGE FOR MONTHLY VEHICLE ANALYTICS MODULE
 
-    // head to login screen if user is not signed in.
-    include_once 'config/session_script.php';
+// head to login screen if user is not signed in.
+include_once 'config/session_script.php';
 
 // Get month from the URL
 if (isset($_GET['month'])) {
@@ -41,8 +41,7 @@ $account_id = $_SESSION['account']['id'];
 // END GRAPH SCRIPTS
 
 // INFO BOX SCRIPTS
-$earned_revenue = earned_revenue();
-$expected_revenue = expected_revenue();
+
 $booking_count_this_month = booking_count_this_month();
 
 $most_popular_vehicle = month_most_popular_vehicle($month);
