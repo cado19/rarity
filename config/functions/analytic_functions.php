@@ -461,7 +461,7 @@ function cancelled_booking_count_this_month($month){
 		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
-		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$con->commit();
 	} catch (Exception $e) {
@@ -474,7 +474,7 @@ function cancelled_booking_count_this_month($month){
 function completed_booking_count_this_month($month){
 	global $con;
 	global $res;
-	$status = "completed";
+	$status = "complete";
 
 	try {
 
@@ -483,7 +483,7 @@ function completed_booking_count_this_month($month){
 		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
-		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$con->commit();
 	} catch (Exception $e) {
@@ -505,7 +505,7 @@ function active_booking_count_this_month($month){
 		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
-		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$res = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$con->commit();
 	} catch (Exception $e) {
