@@ -345,7 +345,7 @@ function cancelled_booking_count(){
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ?";
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status]);
 		$res = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -434,7 +434,7 @@ function cancelled_booking_count_this_month($month){
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -456,7 +456,7 @@ function completed_booking_count_this_month($month){
 
 		$con->beginTransaction();
 
-		$sql = "SELECT b.id, count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
+		$sql = "SELECT count(b.id) AS count FROM bookings b WHERE b.status = ? AND month(b.created_at) = ?";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status, $month]);
 		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
