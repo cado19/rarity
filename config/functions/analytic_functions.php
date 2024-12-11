@@ -279,7 +279,7 @@ function most_popular_categories(){
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT count(vb.category_id) AS total, cat.name AS category FROM vehicle_basics vb INNER JOIN bookings b ON vb.id = b.vehicle_id INNER JOIN vehicle_categories cat ON vb.category_id = cat.id WHERE b.status != 'cancelled' GROUP BY vb.category_id ORDER BY count(vb.category_id) DESC";
+		$sql = "SELECT count(vb.category_id) AS total, cat.name AS category FROM vehicle_basics vb INNER JOIN bookings b ON vb.id = b.vehicle_id INNER JOIN vehicle_categories cat ON vb.category_id = cat.id WHERE b.status != ? GROUP BY vb.category_id ORDER BY count(vb.category_id) DESC";
 		$stmt = $con->prepare($sql);
 		$stmt->execute([$status]);
 		$res = $stmt->fetchAll();
