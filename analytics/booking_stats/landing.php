@@ -117,8 +117,8 @@ $activation_percentage = $active_booking_count['count'] / $booking_count['count'
 							Booking Completion Rate
 							<span class="float-right">
 								<b><?php echo number_format($completion_percentage, 2); ?>%</b>
-								<b><?php show_numeric_value($completed_booking_count, 'count'); ?></b>
-								/<?php show_numeric_value($booking_count, 'count'); ?>
+								[<b><?php show_numeric_value($completed_booking_count, 'count'); ?></b>
+								/<?php show_numeric_value($booking_count, 'count'); ?>]
 							</span>
 							<div class="progress progress-sm">
 								<div class="progress-bar bg-primary" style="width: <?php echo $completion_percentage; ?>%"></div>

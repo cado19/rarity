@@ -120,6 +120,7 @@
 						<div class="progress-group">
 							Booking Completion Rate
 							<span class="float-right">
+								<b><?php echo number_format($completion_percentage, 2); ?>%</b>
 								<b><?php show_numeric_value($completed_booking_count, 'count'); ?></b>
 								/<?php show_numeric_value($booking_count, 'count'); ?>
 							</span>
@@ -150,7 +151,7 @@
 								<div class="progress-bar bg-success" style="width: <?php echo $activation_percentage; ?>%"></div>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>

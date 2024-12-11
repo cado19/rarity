@@ -27,13 +27,14 @@ function client_most_bookings() {
 function client_most_booking() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id GROUP BY c.id ORDER BY Bookings DESC LIMIT 1";
+		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? GROUP BY b.customer_id ORDER BY Bookings DESC LIMIT 1";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
 		$res = $stmt->fetch();
 
 		$con->commit();
@@ -48,13 +49,14 @@ function client_most_booking() {
 function most_profitable_clients() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT c.first_name, c.last_name, sum(b.total) AS Income FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id GROUP BY c.id ORDER BY Income DESC LIMIT 3";
+		$sql = "SELECT c.first_name, c.last_name, sum(b.total) AS Income FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? GROUP BY b.customer_id ORDER BY sum(b.total) DESC LIMIT 10";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
 		$res = $stmt->fetchAll();
 
 		$con->commit();
@@ -65,17 +67,107 @@ function most_profitable_clients() {
 	return $res;
 }
 
-// get clients whose bookings generated the most income
+// get client whose bookings generated the most income
 function most_profitable_client() {
 	global $con;
 	global $res;
+	$status = "cancelled";
 
 	try {
 		$con->beginTransaction();
 
-		$sql = "SELECT c.first_name, c.last_name, sum(b.total) AS Income FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id GROUP BY c.id ORDER BY Income DESC LIMIT 1";
+		$sql = "SELECT c.first_name AS first_name, c.last_name AS last_name, sum(b.total) AS Total FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ?  GROUP BY c.id ORDER BY sum(b.total) DESC LIMIT 1";
 		$stmt = $con->prepare($sql);
-		$stmt->execute();
+		$stmt->execute([$status]);
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+		// **** MONTHLY CLIENT ANALYTICS ****
+// get clients with the most bookings
+function client_most_bookings_month($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? AND month(b.created_at) = ? GROUP BY c.id ORDER BY Bookings DESC LIMIT 10";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status,$month]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// get single client with the most bookings
+function client_most_booking_month($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT c.first_name, c.last_name, count(c.id) AS Bookings FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? AND month(b.created_at) = ? GROUP BY b.customer_id ORDER BY Bookings DESC LIMIT 1";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status,$month]);
+		$res = $stmt->fetch();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// get clients whose bookings generated the most income
+function most_profitable_clients_month($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT c.first_name, c.last_name, sum(b.total) AS Income FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? AND month(b.created_at) = ? GROUP BY b.customer_id ORDER BY sum(b.total) DESC LIMIT 10";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status,$month]);
+		$res = $stmt->fetchAll();
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollback();
+	}
+
+	return $res;
+}
+
+// get client whose bookings generated the most income
+function most_profitable_client_month($month) {
+	global $con;
+	global $res;
+	$status = "cancelled";
+
+	try {
+		$con->beginTransaction();
+
+		$sql = "SELECT c.first_name AS first_name, c.last_name AS last_name, sum(b.total) AS Total FROM customer_details c INNER JOIN bookings b ON c.id = b.customer_id WHERE b.status != ? AND month(b.created_at) = ? GROUP BY c.id ORDER BY sum(b.total) DESC LIMIT 1";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$status,$month]);
 		$res = $stmt->fetch();
 
 		$con->commit();
