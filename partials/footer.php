@@ -56,6 +56,10 @@
 <!-- telephone input init script -->
 <script src="assets/phone.js"></script>
 
+<!-- Search vehicle and client in new booking  -->
+<script src="assets/search_vehicle.js"></script>
+<script src="assets/search_client.js"></script>
+
 <script>
     var input = document.querySelector("#telephone");
     window.intlTelInput(input,({

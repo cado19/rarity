@@ -39,7 +39,14 @@
                             <input type="hidden" name="account_id" value="<?php echo $account_id; ?>">
                             <div class="form-group">
                                 <label for="vehicle_id">Vehicle</label>
-                                <select name="vehicle_id"  class="form-control form-control-border">
+                                <br>
+                                <div class="d-flex justify-content-end">
+                                    <div class="col-4">
+                                        <input type="text" id="filterVehicle" placeholder="Search vehicle..." class="form-control">
+                                    </div>
+                                </div>
+
+                                <select name="vehicle_id" id="vehicleDropdown" class="form-control form-control-border">
                                     <?php foreach ($vehicles as $vehicle): ?>
                                         <option value="<?php echo $vehicle['id']; ?>"><?php echo $vehicle['make']; ?><?php echo " "; ?><?php echo $vehicle['model']; ?><?php echo " "; ?><em><?php echo $vehicle['number_plate']; ?></em>
                                         </option>
@@ -49,7 +56,14 @@
 
                             <div class="form-group">
                                 <label for="customer_id">Customer</label>
-                                <select name="customer_id" class="form-control form-control-border">
+                                <br>
+                                <div class="d-flex justify-content-end">
+                                    <div class="col-4">
+                                        <input type="text" id="filterClient" placeholder="Search client..." class="form-control">
+                                    </div>
+                                </div>
+
+                                <select name="customer_id" id="clientDropdown" class="form-control form-control-border">
                                     <?php foreach ($customers as $customer): ?>
                                         <option value="<?php echo $customer['id']; ?>"><?php echo $customer['first_name']; ?><?php echo " "; ?><?php echo $customer['last_name']; ?> </option>
                                     <?php endforeach;?>
