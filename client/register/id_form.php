@@ -30,11 +30,11 @@
 					    <input type="hidden" name="id" value="<?php echo $id ?>">
 		        		<div class="form-group">
 		        			<label for="id_profile">Front side of ID:</label>
-						    <input type="file" class="form-control-file" name="id_image">
+						    <input type="file" class="form-control-file" name="id_image" accept="image/*" capture>
 		        		</div>
 		        		<div class="form-group">
 		        			<label for="id_profile">Back side of ID:</label>
-						    <input type="file" class="form-control-file" name="id_image_back">
+						    <input type="file" class="form-control-file" name="id_image_back" accept="image/*" capture>
 		        		</div>
 		        		<div class="form-group">
 		        			<button type="submit" class="btn btn-outline-primary">Submit</button>

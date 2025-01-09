@@ -30,7 +30,7 @@
 					    <input type="hidden" name="id" value="<?php echo $id ?>">
 		        		<div class="form-group">
 		        			<label for="id_profile">License Image:</label>
-						    <input type="file" class="form-control-file" name="license_image">
+						    <input type="file" class="form-control-file" name="license_image" accept="image/*" capture>
 		        		</div>
 
 		        		<div class="form-group">
