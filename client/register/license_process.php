@@ -16,13 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	// folder to upload the image and also its destination
 	$folder = "customers/license/" . $filenameNew;
 
-	$sql = "UPDATE customer_details SET license_image = ? WHERE id = ?";
-	$stmt = $con->prepare($sql);
-	$stmt->execute([$filenameNew, $id]);
+	$compressedFront = compressImage($tempname, $folder, 70); 
+
 
 	// Now let's move the uploaded image into the folder: image
-  $response = upload_image($folder, $tempname);
-	if (move_uploaded_file($tempname, $folder)) {
+  // $response = upload_image($folder, $tempname);
+	if ($compressedFront) {
+		$sql = "UPDATE customer_details SET license_image = ? WHERE id = ?";
+		$stmt = $con->prepare($sql);
+		$stmt->execute([$filenameNew, $id]);
 		$msg = " Image uploaded successfully!";
 	} else {
 		$msg = "Failed to upload image!";

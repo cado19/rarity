@@ -33,17 +33,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $front_folder = "customers/id/" . $front_filenameNew;
     $back_folder  = "customers/id/" . $back_filenameNew;
 
-    $sql  = "UPDATE customer_details SET id_image = ?, id_back_image = ? WHERE id = ?";
-    $stmt = $con->prepare($sql);
-    $stmt->execute([$front_filenameNew, $back_filenameNew, $id]);
+    // Compress size and upload image 
+    $compressedFront = compressImage($front_tempname, $front_folder, 70); 
+    $compressedBack = compressImage($back_tempname, $back_folder, 70); 
+
+
+    // $sql  = "UPDATE customer_details SET id_image = ?, id_back_image = ? WHERE id = ?";
+    // $stmt = $con->prepare($sql);
+    // $stmt->execute([$front_filenameNew, $back_filenameNew, $id]);
 
     // Now let's move the uploaded image into the folder: image
     // Now let's move the uploaded image into the folder: image
-    $response = upload_image($front_folder, $front_tempname);
-    $result   = upload_image($back_folder, $back_tempname);
+    // $response = upload_image($front_folder, $front_tempname);
+    // $result   = upload_image($back_folder, $back_tempname);
 
-    if ($response == "Success") {
-        if ($result == "Success") {
+    if ($compressedFront) {
+        if ($compressedBack) {
+            $sql  = "UPDATE customer_details SET id_image = ?, id_back_image = ? WHERE id = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->execute([$front_filenameNew, $back_filenameNew, $id]);
             $msg = "Successfully uploaded ID images";
             header("Location: index.php?page=client/register/success&msg=$msg");
             exit;
